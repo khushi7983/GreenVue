@@ -5,11 +5,16 @@ import FeaturesSection from "./Feature";
 
 const AboutUs = () => {
   return (
-    <div className="mt-5 mb-5">
-            
+    <div className="relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full filter blur-3xl" />
+      </div>
 
-    <section className="bg-gray-900 text-gray-200 py-16 px-6 md:px-12 lg:px-24">
-      <div className="container mx-10 flex flex-col md:flex-row items-center mt-10 mb-36">
+    <section className="relative bg-transparent text-gray-200 py-24 px-6 md:px-12 lg:px-24">
+      <div className="container mx-auto flex flex-col md:flex-row items-center gap-12 max-w-7xl">
         {/* Left Side - Text Content */}
 
   <div className="md:w-1/2 text-center md:text-left">
