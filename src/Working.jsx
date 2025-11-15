@@ -1,105 +1,199 @@
 import React from 'react';
-import { FaCheck } from 'react-icons/fa';
-import { HiMail } from 'react-icons/hi';
+import { motion } from 'framer-motion';
+import { FaCheck, FaGraduationCap, FaCalculator, FaChartLine } from 'react-icons/fa';
+import { HiMail, HiSparkles } from 'react-icons/hi';
+import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const Working = () => {
   return (
-    <div className="w-full bg-gray-900 text-white">
-      {/* How It Works Section */}
-      {/* <section className="w-full py-20 bg-gray-900">
+    <div className="relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full filter blur-3xl" />
+      </div>
+
+      <section className="relative bg-transparent text-white py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-3xl md:text-4xl font-bold mb-4 
                          bg-gradient-to-r from-green-400 to-green-600 
-                         bg-clip-text text-transparent">
-            How It Works
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 text-center border border-gray-700 rounded-lg 
-                           hover:border-green-500/50 transition-all duration-300 
-                           bg-gray-800 hover:transform hover:scale-105">
-              <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                             justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-                <span className="text-xl font-bold">1</span>
+                         bg-clip-text text-transparent"
+            >
+              How It Works
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-gray-400 text-lg max-w-2xl mx-auto"
+            >
+              Start your sustainable investing journey in three simple steps
+            </motion.p>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8 }}
+              className="relative p-8 text-center border border-slate-700/50 rounded-2xl 
+                         hover:border-green-500/50 transition-all duration-500 
+                         bg-slate-800/50 backdrop-blur-sm group cursor-pointer
+                         hover:shadow-xl hover:shadow-green-500/10"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              
+              <div className="relative z-10">
+                <div className="relative mb-6">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-16 h-16 rounded-2xl 
+                                flex items-center justify-center mx-auto shadow-lg shadow-green-500/30
+                                group-hover:scale-110 transition-transform duration-500">
+                    <FaGraduationCap className="text-2xl text-white" />
+                  </div>
+                  
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
+                               transition-colors duration-300">
+                  Learn About ESG Funds
+                </h3>
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
+                  Discover the power of sustainable investing and how ESG funds create positive environmental and social impact.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-green-400">Create Account</h3>
-              <p className="text-gray-300">Sign up and complete your green investor profile in minutes.</p>
-            </div>
-            <div className="p-6 text-center border border-gray-700 rounded-lg 
-                           hover:border-green-500/50 transition-all duration-300 
-                           bg-gray-800 hover:transform hover:scale-105">
-              <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                             justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-                <span className="text-xl font-bold">2</span>
+            </motion.div>
+
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -8 }}
+              className="relative p-8 text-center border border-slate-700/50 rounded-2xl 
+                         hover:border-green-500/50 transition-all duration-500 
+                         bg-slate-800/50 backdrop-blur-sm group cursor-pointer
+                         hover:shadow-xl hover:shadow-green-500/10"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              
+              <div className="relative z-10">
+                <div className="relative mb-6">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-16 h-16 rounded-2xl 
+                                flex items-center justify-center mx-auto shadow-lg shadow-green-500/30
+                                group-hover:scale-110 transition-transform duration-500">
+                    <FaCalculator className="text-2xl text-white" />
+                  </div>
+                
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
+                               transition-colors duration-300">
+                  Calculate Your Investment
+                </h3>
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
+                  Use our smart calculator to determine the optimal allocation of your income toward sustainable investments.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-green-400">Analyze Portfolio</h3>
-              <p className="text-gray-300">Get detailed sustainability scores and improvement suggestions.</p>
-            </div>
-            <div className="p-6 text-center border border-gray-700 rounded-lg 
-                           hover:border-green-500/50 transition-all duration-300 
-                           bg-gray-800 hover:transform hover:scale-105">
-              <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                             justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-                <span className="text-xl font-bold">3</span>
+            </motion.div>
+
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ y: -8 }}
+              className="relative p-8 text-center border border-slate-700/50 rounded-2xl 
+                         hover:border-green-500/50 transition-all duration-500 
+                         bg-slate-800/50 backdrop-blur-sm group cursor-pointer
+                         hover:shadow-xl hover:shadow-green-500/10"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              
+              <div className="relative z-10">
+                <div className="relative mb-6">
+                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 w-16 h-16 rounded-2xl 
+                                flex items-center justify-center mx-auto shadow-lg shadow-green-500/30
+                                group-hover:scale-110 transition-transform duration-500">
+                    <FaChartLine className="text-2xl text-white" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
+                               transition-colors duration-300">
+                  Simulate & Track Impact
+                </h3>
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
+                  Make virtual investments, monitor your portfolio performance, and visualize your positive impact.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-green-400">Start Investing</h3>
-              <p className="text-gray-300">Invest in verified green opportunities and track your impact.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section> */}
-      <section className="w-full py-20 bg-gray-900">
-  <div className="container mx-auto px-4">
-    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 
-                   bg-gradient-to-r from-green-400 to-green-600 
-                   bg-clip-text text-transparent">
-      How It Works
-    </h2>
-    <div className="grid md:grid-cols-3 gap-8">
-      <div className="p-6 text-center border border-gray-700 rounded-lg 
-                     hover:border-green-500/50 transition-all duration-300 
-                     bg-gray-800 hover:transform hover:scale-105">
-        <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                       justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-          <span className="text-xl font-bold">1</span>
-        </div>
-        <h3 className="text-xl font-semibold mb-3 text-green-400">Learn About ESG Funds</h3>
-        <p className="text-gray-300">Explore the impact of ESG mutual funds and why sustainable investing matters.</p>
-      </div>
-      <div className="p-6 text-center border border-gray-700 rounded-lg 
-                     hover:border-green-500/50 transition-all duration-300 
-                     bg-gray-800 hover:transform hover:scale-105">
-        <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                       justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-          <span className="text-xl font-bold">2</span>
-        </div>
-        <h3 className="text-xl font-semibold mb-3 text-green-400">Calculate Your Investment</h3>
-        <p className="text-gray-300">Use our tool to determine how much of your income you can allocate toward ESG funds.</p>
-      </div>
-      <div className="p-6 text-center border border-gray-700 rounded-lg 
-                     hover:border-green-500/50 transition-all duration-300 
-                     bg-gray-800 hover:transform hover:scale-105">
-        <div className="bg-green-500 w-14 h-14 rounded-full flex items-center 
-                       justify-center mx-auto mb-4 shadow-lg shadow-green-500/20">
-          <span className="text-xl font-bold">3</span>
-        </div>
-        <h3 className="text-xl font-semibold mb-3 text-green-400">Simulate & Track Impact</h3>
-        <p className="text-gray-300">Make virtual investments, track your portfolio, and see the real-world impact of your choices.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
       {/* Pricing Plans Section */}
-      <section className="w-full py-20 bg-gray-900">
+      <section className="relative bg-transparent py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-3xl md:text-4xl font-bold mb-4 
                          bg-gradient-to-r from-green-400 to-green-600 
-                         bg-clip-text text-transparent">
-            Choose Your Plan
-          </h2>
+                         bg-clip-text text-transparent"
+            >
+              Choose Your Plan
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-gray-400 text-lg max-w-2xl mx-auto"
+            >
+              Select the perfect plan to start your sustainable investing journey
+            </motion.p>
+          </motion.div>
           <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-gray-800 rounded-xl p-8 text-center border border-gray-700 
-                           hover:border-green-500/50 transition-all duration-300">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8 }}
+              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 text-center border border-slate-700/50 
+                         hover:border-green-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-green-500/10
+                         group cursor-pointer relative overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
               <h3 className="text-xl font-semibold mb-4 text-white">Basic</h3>
               <p className="text-3xl font-bold mb-6 text-white">Free</p>
               <ul className="space-y-4 mb-8">
@@ -116,12 +210,30 @@ const Working = () => {
                   <span className="text-white">Community Access</span>
                 </li>
               </ul>
-              <button className="w-full bg-gray-600 hover:bg-gray-500 text-white py-2 rounded-lg transition">
+              <button className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
+                                font-medium hover:shadow-lg">
                 Get Started
               </button>
-            </div>
-            <div className="bg-green-600 rounded-xl p-8 text-center transform scale-105 
-                           shadow-xl shadow-green-500/20 border border-green-500/50">
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1.05 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -12, scale: 1.08 }}
+              className="bg-gradient-to-br from-green-600 to-emerald-700 rounded-2xl p-8 text-center 
+                         shadow-2xl shadow-green-500/30 border border-green-500/50 relative overflow-hidden
+                         group cursor-pointer"
+            >
+              <div className="absolute top-0 right-0 bg-yellow-400 text-green-900 px-3 py-1 
+                            rounded-bl-xl text-sm font-bold flex items-center gap-1">
+                <HiSparkles className="w-4 h-4" />
+                Popular
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent 
+                            opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
               <h3 className="text-xl font-semibold mb-4">Pro</h3>
               <p className="text-3xl font-bold mb-6">₹499/mo</p>
               <ul className="space-y-4 mb-8">
@@ -138,11 +250,14 @@ const Working = () => {
                   <span>Expert Consultation</span>
                 </li>
               </ul>
-              <button className="w-full bg-white text-green-600 py-2 rounded-lg hover:bg-gray-100 transition">
+              <button className="w-full bg-white text-green-600 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300
+                                font-medium hover:shadow-lg">
                 Go Pro
+                <ArrowRight className="inline-block w-4 h-4 ml-2" />
               </button>
-            </div>
-            <div className="bg-gray-800 rounded-xl p-8 text-center border border-gray-700 
+              </div>
+            </motion.div>
+            <div className="bg-slate-800 rounded-xl p-8 text-center border border-slate-700 
                            hover:border-green-500/50 transition-all duration-300">
               <h3 className="text-xl font-semibold mb-4 text-white">Enterprise</h3>
               <p className="text-3xl font-bold mb-6 text-white">Custom</p>
@@ -160,19 +275,31 @@ const Working = () => {
                   <span className="text-white">API Access</span>
                 </li>
               </ul>
-              <button className="w-full bg-gray-600 hover:bg-gray-500 text-white py-2 rounded-lg transition">
+              <button className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
+                                font-medium hover:shadow-lg">
                 Contact Sales
+                <TrendingUp className="inline-block w-4 h-4 ml-2" />
               </button>
-            </div>
+              </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter Section */}
-      <section className="w-full py-20 bg-gray-900">
+      <section className="relative bg-transparent py-20">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700 
-                         hover:border-green-500/50 transition-all duration-300">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-slate-700/50 
+                       hover:border-green-500/50 transition-all duration-500 relative overflow-hidden
+                       group hover:shadow-2xl hover:shadow-green-500/10"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-emerald-500/5 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 
                             bg-gradient-to-r from-green-400 to-green-600 
@@ -185,8 +312,8 @@ const Working = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-1 px-4 py-3 rounded-lg bg-gray-300 border border-gray-700 
-                           focus:outline-none focus:border-green-500 transition-all duration-300"
+                className="flex-1 px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 
+                           focus:outline-none focus:border-green-500 transition-all duration-300 text-white"
               />
               <button className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-lg 
                                 font-semibold transition-all duration-300 flex items-center 
@@ -194,8 +321,9 @@ const Working = () => {
                 Subscribe
                 <HiMail className="w-5 h-5" />
               </button>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
