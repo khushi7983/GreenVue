@@ -37,7 +37,6 @@ const LandingPage = () => {
           <FAQSection />
         </div>
         
-        <Footer />
       </div> 
     </div>
   );
