@@ -6,9 +6,9 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { connectDB, setupConnectionHandlers } from './config/database.js';
 import { initializeData } from './config/seedData.js';
-import { fundRoutes, newsRoutes, contactRoutes, newsletterRoutes } from './routes/index.js';
+import { fundRoutes, contactRoutes, newsletterRoutes } from './routes/index.js';
 import { healthCheck, apiInfo } from './controllers/generalController.js';
-import { ESGFund, News, Contact, Newsletter } from './models/index.js';
+import { ESGFund, Contact, Newsletter } from './models/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,7 +30,6 @@ connectDB();
 // Use MVC routes
 app.use('/api/esg-funds', fundRoutes);
 app.use('/api/funds', fundRoutes); // Alternative endpoint
-app.use('/api/news', newsRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/contacts', contactRoutes); // Alternative endpoint
 app.use('/api/newsletter', newsletterRoutes);
