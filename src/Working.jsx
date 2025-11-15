@@ -1,10 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaCheck, FaGraduationCap, FaCalculator, FaChartLine } from 'react-icons/fa';
 import { HiMail, HiSparkles } from 'react-icons/hi';
 import { ArrowRight, TrendingUp } from 'lucide-react';
 
 const Working = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/green-funds');
+  };
+
+  const handleGoPro = () => {
+    navigate('/features');
+  };
+
+  const handleContactSales = () => {
+    // Scroll to contact section or navigate to contact page
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative overflow-hidden">
       {/* Background Elements */}
@@ -210,8 +229,11 @@ const Working = () => {
                   <span className="text-white">Community Access</span>
                 </li>
               </ul>
-              <button className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
-                                font-medium hover:shadow-lg">
+              <button 
+                onClick={handleGetStarted}
+                className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
+                                font-medium hover:shadow-lg cursor-pointer"
+              >
                 Get Started
               </button>
               </div>
@@ -250,8 +272,11 @@ const Working = () => {
                   <span>Expert Consultation</span>
                 </li>
               </ul>
-              <button className="w-full bg-white text-green-600 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300
-                                font-medium hover:shadow-lg">
+              <button 
+                onClick={handleGoPro}
+                className="w-full bg-white text-green-600 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300
+                                font-medium hover:shadow-lg cursor-pointer"
+              >
                 Go Pro
                 <ArrowRight className="inline-block w-4 h-4 ml-2" />
               </button>
@@ -275,8 +300,11 @@ const Working = () => {
                   <span className="text-white">API Access</span>
                 </li>
               </ul>
-              <button className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
-                                font-medium hover:shadow-lg">
+              <button 
+                onClick={handleContactSales}
+                className="w-full bg-slate-600 hover:bg-slate-500 text-white py-3 rounded-lg transition-all duration-300
+                                font-medium hover:shadow-lg cursor-pointer"
+              >
                 Contact Sales
                 <TrendingUp className="inline-block w-4 h-4 ml-2" />
               </button>

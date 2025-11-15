@@ -20,7 +20,7 @@ const Navbar = ({ onGetStarted }) => {
     if (onGetStarted) {
       onGetStarted();
     } else {
-      navigate('/features');
+      navigate('/green-funds');
     }
     setIsMobileMenuOpen(false);
   };

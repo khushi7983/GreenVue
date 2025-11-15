@@ -1,7 +1,4 @@
 import express from 'express';
-import mysql from 'mysql2/promise';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
@@ -18,216 +15,116 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Database connection
-const db = await mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+
+
+// Sample ESG data for the frontend
+const esgFunds = [
+  {
+    id: 1,
+    name: "Green Energy Fund",
+    type: "ESG Equity",
+    returns: "12.5%",
+    rating: "5/5",
+    description: "Focuses on renewable energy companies"
+  },
+  {
+    id: 2,
+    name: "Sustainable Growth Fund",
+    type: "ESG Mixed",
+    returns: "10.2%",
+    rating: "4/5",
+    description: "Balanced portfolio of sustainable companies"
+  },
+  {
+    id: 3,
+    name: "Social Impact Fund",
+    type: "ESG Social",
+    returns: "9.8%",
+    rating: "4/5",
+    description: "Companies with strong social responsibility"
+  }
+];
+
+const newsData = [
+  {
+    id: 1,
+    title: "ESG Investment Reaches New Heights in 2025",
+    summary: "Sustainable investing hits record levels as young investors drive demand",
+    date: "2025-11-15"
+  },
+  {
+    id: 2,
+    title: "Clean Energy Stocks Outperform Market",
+    summary: "Renewable energy companies show strong Q3 performance",
+    date: "2025-11-14"
+  }
+];
+
+// API Routes
+app.get('/api/esg-funds', (req, res) => {
+  res.json({ success: true, data: esgFunds });
 });
 
-// Add this after your database connection
-const checkDatabaseConnection = async () => {
-  try {
-    // Test the connection
-    await db.query('SELECT 1');
-    console.log('✅ Database connected successfully');
-
-    // Check if users table exists
-    const [tables] = await db.query(`
-      SELECT TABLE_NAME 
-      FROM information_schema.TABLES 
-      WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'users'
-    `, [process.env.DB_NAME]);
-
-    if (tables.length === 0) {
-      console.log('⚠️ Users table not found, creating...');
-      await db.query(`
-        CREATE TABLE users (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(255) NOT NULL,
-          email VARCHAR(255) NOT NULL UNIQUE,
-          password VARCHAR(255) NOT NULL,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-      `);
-      console.log('✅ Users table created successfully');
-    } else {
-      console.log('✅ Users table exists');
-    }
-
-  } catch (error) {
-    console.error('❌ Database connection failed:', error);
-    process.exit(1);
+app.get('/api/esg-funds/:id', (req, res) => {
+  const fund = esgFunds.find(f => f.id === parseInt(req.params.id));
+  if (!fund) {
+    return res.status(404).json({ success: false, message: 'Fund not found' });
   }
-};
-
-// Call the function when starting the server
-checkDatabaseConnection();
-
-// Routes
-app.post('/api/auth/signup', async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    console.log('📝 Signup attempt:', { name, email });
-
-    // Check if all required fields are present
-    if (!name || !email || !password) {
-      console.log('❌ Missing required fields');
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-
-    const [existingUsers] = await db.query(
-      'SELECT * FROM users WHERE email = ?',
-      [email]
-    );
-
-    if (existingUsers.length > 0) {
-      console.log('❌ Email already exists:', email);
-      return res.status(400).json({ message: 'Email already registered' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('✅ Password hashed successfully');
-
-    const [result] = await db.query(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, hashedPassword]
-    );
-
-    console.log('✅ User created successfully:', result.insertId);
-
-    const token = jwt.sign(
-      { userId: result.insertId },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '24h' }
-    );
-
-    res.status(201).json({
-      message: 'User created successfully',
-      token,
-      user: { id: result.insertId, name, email }
-    });
-
-  } catch (error) {
-    console.error('❌ Signup error:', error);
-    res.status(500).json({ 
-      message: 'Error creating user',
-      error: error.message 
-    });
-  }
+  res.json({ success: true, data: fund });
 });
 
-app.post('/api/auth/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    console.log('🔑 Login attempt:', email);
-
-    if (!email || !password) {
-      console.log('❌ Missing email or password');
-      return res.status(400).json({ message: 'Email and password are required' });
-    }
-
-    const [users] = await db.query(
-      'SELECT * FROM users WHERE email = ?',
-      [email]
-    );
-
-    if (users.length === 0) {
-      console.log('❌ User not found:', email);
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const user = users[0];
-    const validPassword = await bcrypt.compare(password, user.password);
-
-    if (!validPassword) {
-      console.log('❌ Invalid password for:', email);
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    console.log('✅ Login successful:', email);
-
-    const token = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '24h' }
-    );
-
-    res.json({
-      message: 'Login successful',
-      token,
-      user: { id: user.id, name: user.name, email: user.email }
-    });
-
-  } catch (error) {
-    console.error('❌ Login error:', error);
-    res.status(500).json({ 
-      message: 'Error during login',
-      error: error.message 
-    });
-  }
+app.get('/api/news', (req, res) => {
+  res.json({ success: true, data: newsData });
 });
 
-// Middleware to verify JWT token
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
-    req.user = user;
-    next();
+app.post('/api/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  console.log('📧 Contact form submission:', { name, email });
+  
+  // In a real app, you'd save this to a database or send an email
+  res.json({ 
+    success: true, 
+    message: 'Thank you for your message! We\'ll get back to you soon.' 
   });
-}
-
-// Protected route example
-app.get('/api/auth/user', authenticateToken, async (req, res) => {
-  try {
-    const [user] = await db.query(
-      'SELECT id, name, email FROM users WHERE id = ?',
-      [req.user.userId]
-    );
-    
-    if (user.length === 0) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.json(user[0]);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching user data' });
-  }
 });
 
-// Example route to fetch all users (for testing purposes)
-app.get('/api/users', async (req, res) => {
-  try {
-    const [rows] = await db.query('SELECT * FROM users');
-    res.json(rows);
-  } catch (error) {
-    console.error('❌ Error fetching users:', error);
-    res.status(500).json({ message: 'Failed to fetch users' });
-  }
+app.post('/api/newsletter', (req, res) => {
+  const { email } = req.body;
+  console.log('📬 Newsletter subscription:', email);
+  
+  res.json({ 
+    success: true, 
+    message: 'Successfully subscribed to newsletter!' 
+  });
 });
 
 
-// Add this near your other routes
+// Root route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to GreenVest API' });
+  res.json({ 
+    message: 'Welcome to GreenVue API',
+    version: '1.0.0',
+    endpoints: {
+      esgFunds: '/api/esg-funds',
+      news: '/api/news',
+      contact: '/api/contact',
+      newsletter: '/api/newsletter'
+    }
+  });
 });
 
-// Test route to verify API is working
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Auth server is working!' });
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    message: 'GreenVue API is running!' 
+  });
 });
 
 const PORT = 5002;
 app.listen(PORT, () => {
-  console.log(`🚀 Authentication Server running on port ${PORT}`);
+  console.log(`🚀 GreenVue API Server running on port ${PORT}`);
+  console.log(`🌱 Serving ESG data and content APIs`);
+  console.log(`🔗 Visit http://localhost:${PORT} for API documentation`);
 }); 
