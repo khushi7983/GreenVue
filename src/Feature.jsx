@@ -8,11 +8,14 @@ import {
   Target
 } from 'lucide-react';
 
-const FeatureCard = ({ title, description, icon: Icon }) => (
-  <div className="p-8 border border-gray-700/50 rounded-xl bg-gray-900/90 shadow-lg 
-                  hover:shadow-2xl transition-all duration-500 hover:scale-102 
-                  hover:border-green-500/30 group backdrop-blur-sm
-                  relative overflow-hidden">
+const FeatureCard = ({ title, description, icon: Icon, delay = 0 }) => (
+  <div 
+    className="p-8 border border-gray-700/50 rounded-xl bg-gray-900/90 shadow-lg 
+                hover:shadow-2xl transition-all duration-500 hover:scale-102 
+                hover:border-green-500/30 group backdrop-blur-sm
+                relative overflow-hidden opacity-100 translate-y-0"
+    style={{ transitionDelay: `${delay}ms` }}
+  >
     <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent 
                     opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
     <div className="relative z-10">
@@ -72,17 +75,23 @@ const FeaturesSection = () => {
 
   return (
     <section className="relative w-full bg-gray-800 overflow-hidden mt-24 md:mt-32">
+      {/* Enhanced Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,#1a472a,#111827_60%)]"/>
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl animate-pulse"/>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-500/10 rounded-full blur-2xl animate-pulse delay-2000"/>
+      </div>
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
         <div className="text-center mb-16 sm:mb-20">
           <h2 className="text-xl sm:text-4xl md:text-5xl font-bold text-white mb-4 
                          bg-gradient-to-r from-green-400 via-green-300 to-green-500 
                          bg-clip-text 
-                         [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                         [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]
+                         animate-fade-in-up">
             Why Choose ESG Investing?
           </h2>
           <p className="text-sm sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto
-                        font-light">
+                        font-light animate-fade-in-up-delayed">
             Build a portfolio that delivers both financial returns and positive impact
           </p>
         </div>
@@ -95,6 +104,7 @@ const FeaturesSection = () => {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
+              delay={index * 100}
             />
           ))}
         </div>
