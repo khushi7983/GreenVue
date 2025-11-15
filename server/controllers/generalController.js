@@ -21,8 +21,6 @@ export const apiInfo = (req, res) => {
     description: 'Sustainable investment platform API',
     endpoints: {
       health: '/api/health',
-      esgFunds: '/api/esg-funds',
-      news: '/api/news',
       contact: '/api/contact',
       newsletter: '/api/newsletter'
     },
