@@ -5,9 +5,9 @@ import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { connectDB, setupConnectionHandlers } from './config/database.js';
-import { contactRoutes, newsletterRoutes } from './routes/index.js';
+import { contactRoutes, newsletterRoutes, authRoutes } from './routes/index.js';
 import { healthCheck, apiInfo } from './controllers/generalController.js';
-import { Contact, Newsletter } from './models/index.js';
+import { Contact, Newsletter, User } from './models/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,6 +27,7 @@ setupConnectionHandlers();
 connectDB();
 
 // Use MVC routes
+app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/contacts', contactRoutes); // Alternative endpoint
 app.use('/api/newsletter', newsletterRoutes);

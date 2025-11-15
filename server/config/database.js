@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 // MongoDB Connection Configuration
 export const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/greenvue';
+    const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/greenvue';
     
     const options = {
       // Connection options for better performance and reliability

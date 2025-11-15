@@ -5,6 +5,9 @@ import FeaturePage from './FeaturePage'
 import GreenFundSearch from './components/GreenFundSearch'
 import BuyStock from './components/BuyStock'
 import TransactionPage from './components/TransactionPage'
+import Login from './components/auth/Login'
+import Signup from './components/auth/Signup'
+import AuthTest from './components/auth/AuthTest'
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
           <Route path="/green-funds" element={<GreenFundSearch />} />
           <Route path="/invest" element={<BuyStock />} />
           <Route path="/transaction" element={<TransactionPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/auth-test" element={<AuthTest />} />
         </Routes>
         <Footer />
       </div>

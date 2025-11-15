@@ -21,6 +21,7 @@ export const apiInfo = (req, res) => {
     description: 'Sustainable investment platform API',
     endpoints: {
       health: '/api/health',
+      auth: '/api/auth',
       contact: '/api/contact',
       newsletter: '/api/newsletter'
     },
