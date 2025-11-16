@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, LogIn, CheckCircle, AlertCircle } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,10 @@ const Login = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the page user was trying to access before login
+  const from = location.state?.from?.pathname || '/';
 
   const handleChange = (e) => {
     setFormData({
@@ -44,9 +48,9 @@ const Login = () => {
         localStorage.setItem('token', data.data.token);
         localStorage.setItem('user', JSON.stringify(data.data.user));
         
-        // Redirect to dashboard or home after successful login
+        // Redirect to the page user was trying to access, or home
         setTimeout(() => {
-          navigate('/');
+          navigate(from, { replace: true });
         }, 1500);
       } else {
         setMessage({ type: 'error', text: data.message });
