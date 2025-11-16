@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle, FaRupeeSign } from 'react-icons/fa';
 
 const TransactionPage = () => {
   const location = useLocation();
@@ -12,14 +13,37 @@ const TransactionPage = () => {
 
   if (!fund) {
     return (
-      <div className="p-6 text-center">
-        <h2 className="text-2xl text-gray-700 mb-4">No fund selected. Please go back and select a fund.</h2>
-        <button 
-          onClick={() => navigate('/')}
-          className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
-        >
-          Back to Funds
-        </button>
+      <div className="relative overflow-hidden min-h-screen">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-red-500/5 rounded-full filter blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/5 rounded-full filter blur-3xl" />
+        </div>
+        <div className="relative bg-transparent text-white flex items-center justify-center min-h-screen p-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 text-center max-w-md"
+          >
+            <div className="p-4 bg-red-500/20 rounded-2xl mb-6 inline-block">
+              <FaInfoCircle className="text-3xl text-red-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-200 mb-4">No Fund Selected</h2>
+            <p className="text-gray-400 mb-6">Please go back and select a fund to proceed with your investment.</p>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/green-funds')}
+              className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 
+                       text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 
+                       shadow-lg hover:shadow-green-500/25 flex items-center gap-2 mx-auto"
+            >
+              <FaLeaf />
+              Back to Funds
+            </motion.button>
+          </motion.div>
+        </div>
       </div>
     );
   }
@@ -38,182 +62,114 @@ const TransactionPage = () => {
     setShowConfirmation(true);
   };
 
-  const styles = {
-    pageWrapper: {
-      minHeight: '100vh',
-      width: '100%',
-      backgroundColor: '#111827', // Dark background to match landing page
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      overflowY: 'auto'
-    },
-    container: {
-      maxWidth: '900px',
-      margin: '0 auto',
-      padding: '30px 20px',
-      color: '#f3f4f6'
-    },
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      marginBottom: '30px'
-    },
-    backButton: {
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: '#10b981',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      fontSize: '1.1rem',
-      padding: '8px 16px',
-      borderRadius: '6px',
-      transition: 'all 0.2s ease',
-      ':hover': {
-        backgroundColor: 'rgba(16, 185, 129, 0.1)'
-      }
-    },
-    card: {
-      backgroundColor: '#111827',
-      borderRadius: '16px',
-      padding: '32px',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
-      border: '1px solid #374151'
-    },
-    fundName: {
-      fontSize: '1.8rem',
-      color: '#10b981',
-      marginBottom: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      borderBottom: '2px solid #374151',
-      paddingBottom: '16px'
-    },
-    fundInfo: {
-      backgroundColor: '#1f2937',
-      padding: '20px',
-      borderRadius: '12px',
-      marginBottom: '24px'
-    },
-    infoRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '8px 0',
-      borderBottom: '1px solid #374151',
-      color: '#f3f4f6'
-    },
-    form: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '24px'
-    },
-    inputGroup: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '8px'
-    },
-    label: {
-      fontSize: '1.1rem',
-      color: '#f3f4f6',
-      fontWeight: '500'
-    },
-    input: {
-      padding: '16px',
-      backgroundColor: '#1f2937',
-      border: '2px solid #374151',
-      borderRadius: '10px',
-      fontSize: '1.1rem',
-      color: '#f3f4f6',
-      transition: 'all 0.2s ease',
-      ':focus': {
-        borderColor: '#10b981',
-        outline: 'none'
-      }
-    },
-    button: {
-      padding: '16px 32px',
-      backgroundColor: '#10b981',
-      color: 'white',
-      border: 'none',
-      borderRadius: '10px',
-      cursor: 'pointer',
-      fontSize: '1.1rem',
-      fontWeight: '600',
-      transition: 'all 0.3s ease',
-      ':hover': {
-        backgroundColor: '#059669',
-        transform: 'scale(1.02)'
-      },
-      ':disabled': {
-        backgroundColor: '#065f46',
-        cursor: 'not-allowed'
-      }
-    },
-    confirmation: {
-      textAlign: 'center',
-      padding: '40px 24px'
-    },
-    successIcon: {
-      color: '#10b981',
-      fontSize: '64px',
-      marginBottom: '24px'
-    },
-    confirmationDetails: {
-      backgroundColor: '#1f2937',
-      padding: '24px',
-      borderRadius: '12px',
-      marginTop: '24px',
-      marginBottom: '32px',
-      border: '1px solid #374151'
-    }
-  };
+
 
   if (showConfirmation) {
     return (
-      <div style={styles.pageWrapper}>
-        <div style={styles.container}>
-          <div style={styles.card}>
-            <div style={styles.confirmation}>
-              <FaCheckCircle style={styles.successIcon} />
-              <h2 style={{ fontSize: '2rem', color: '#10b981', marginBottom: '16px' }}>
+      <div className="relative overflow-hidden min-h-screen">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full filter blur-3xl" />
+          <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/3 rounded-full filter blur-2xl" />
+        </div>
+        
+        <div className="relative bg-transparent text-white min-h-screen flex items-center justify-center p-6">
+          <div className="max-w-2xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-slate-700/50 
+                       shadow-2xl p-8 md:p-12 text-center"
+            >
+              {/* Success Animation */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mb-8"
+              >
+                <div className="p-6 bg-green-500/20 rounded-full inline-block mb-6">
+                  <FaCheckCircle className="text-6xl text-green-400" />
+                </div>
+              </motion.div>
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+                         bg-clip-text text-transparent mb-8"
+              >
                 Investment Successful!
-              </h2>
-              <div style={styles.confirmationDetails}>
-                <p style={{ fontSize: '1.2rem', color: '#f3f4f6' }}>
-                  You have invested ₹{transaction.amount.toLocaleString()} in
-                </p>
-                <p style={{ fontSize: '1.4rem', fontWeight: '600', color: '#10b981', margin: '12px 0' }}>
-                  {transaction.fund}
-                </p>
-                <div style={{ marginTop: '24px', color: '#d1d5db' }}>
-                  <p style={{ marginBottom: '8px' }}>
-                    <FaChartLine style={{ display: 'inline', marginRight: '8px', color: '#10b981' }} />
-                    Units allocated: {transaction.units}
-                  </p>
-                  <p>
-                    <FaInfoCircle style={{ display: 'inline', marginRight: '8px', color: '#10b981' }} />
-                    Transaction Date: {transaction.date}
+              </motion.h2>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="bg-slate-700/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-600/50 mb-8"
+              >
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <FaRupeeSign className="text-green-400" />
+                  <p className="text-xl text-gray-200">
+                    You have invested <span className="font-bold text-green-400">₹{transaction.amount.toLocaleString()}</span> in
                   </p>
                 </div>
-              </div>
-              <button 
-                onClick={() => navigate('/')}
-                style={{
-                  ...styles.button,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}
+                <p className="text-xl font-semibold text-green-300 mb-6 leading-relaxed">
+                  {transaction.fund}
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                  <div className="bg-slate-600/30 p-4 rounded-xl border border-slate-500/30">
+                    <div className="flex items-center gap-2 text-green-400 mb-2">
+                      <FaChartLine />
+                      <span className="font-medium">Units Allocated</span>
+                    </div>
+                    <p className="text-2xl font-bold text-white">{transaction.units}</p>
+                  </div>
+                  <div className="bg-slate-600/30 p-4 rounded-xl border border-slate-500/30">
+                    <div className="flex items-center gap-2 text-blue-400 mb-2">
+                      <FaInfoCircle />
+                      <span className="font-medium">Transaction Date</span>
+                    </div>
+                    <p className="text-sm font-medium text-gray-300">{transaction.date}</p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
               >
-                <FaLeaf /> View All Funds
-              </button>
-            </div>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate('/green-funds')}
+                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 
+                           hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-semibold 
+                           transition-all duration-300 shadow-lg hover:shadow-green-500/25 
+                           flex items-center justify-center gap-2"
+                >
+                  <FaLeaf />
+                  View All Funds
+                </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate('/')}
+                  className="border border-slate-600/50 hover:border-green-500/50 text-gray-300 
+                           hover:text-green-300 px-8 py-4 rounded-xl font-semibold 
+                           transition-all duration-300 hover:bg-green-500/10"
+                >
+                  Back to Home
+                </motion.button>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -221,64 +177,139 @@ const TransactionPage = () => {
   }
 
   return (
-    <div style={styles.pageWrapper}>
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <button 
-            onClick={() => navigate('/')}
-            style={styles.backButton}
+    <div className="relative overflow-hidden min-h-screen">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/3 rounded-full filter blur-2xl" />
+      </div>
+      
+      <div className="relative bg-transparent text-white p-6 md:p-10">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-4 mb-8"
           >
-            <FaArrowLeft /> Back to Funds
-          </button>
-        </div>
-
-        <div style={styles.card}>
-          <h2 style={styles.fundName}>
-            <FaLeaf />
-            {fund.schemeName}
-          </h2>
-
-          <div style={styles.fundInfo}>
-            <div style={styles.infoRow}>
-              <span>Scheme Code:</span>
-              <span>{fund.schemeCode}</span>
-            </div>
-            {fund.isinGrowth && (
-              <div style={styles.infoRow}>
-                <span>ISIN (Growth):</span>
-                <span>{fund.isinGrowth}</span>
-              </div>
-            )}
-          </div>
-          
-          <form onSubmit={handleTransaction} style={styles.form}>
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>
-                Investment Amount (₹)
-              </label>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                min="100"
-                step="100"
-                required
-                placeholder="Enter amount (minimum ₹100)"
-                style={styles.input}
-              />
-              <p style={{ color: '#718096', fontSize: '0.9rem', marginTop: '4px' }}>
-                Minimum investment: ₹100
-              </p>
-            </div>
-            
-            <button 
-              type="submit"
-              style={styles.button}
-              disabled={!amount || amount < 100}
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/green-funds')}
+              className="flex items-center gap-2 text-green-400 hover:text-green-300 
+                       bg-green-500/10 hover:bg-green-500/20 px-4 py-2 rounded-xl 
+                       border border-green-500/30 hover:border-green-500/50 
+                       transition-all duration-300 font-medium"
             >
-              Invest Now
-            </button>
-          </form>
+              <FaArrowLeft />
+              Back to Funds
+            </motion.button>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-slate-700/50 
+                     shadow-2xl overflow-hidden"
+          >
+            {/* Fund Header */}
+            <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-8 border-b border-slate-700/50">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-green-500/20 rounded-2xl">
+                  <FaLeaf className="text-2xl text-green-400" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl md:text-3xl font-bold text-green-400 leading-tight">
+                    {fund.schemeName}
+                  </h2>
+                  <p className="text-gray-300 mt-1">Complete your investment</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8">
+              {/* Fund Information */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-slate-700/30 backdrop-blur-sm p-6 rounded-2xl border border-slate-600/50 mb-8"
+              >
+                <h3 className="text-lg font-semibold text-gray-200 mb-4 flex items-center gap-2">
+                  <FaInfoCircle className="text-green-400" />
+                  Fund Details
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
+                    <span className="text-gray-400">Scheme Code:</span>
+                    <span className="font-mono text-gray-200">{fund.schemeCode}</span>
+                  </div>
+                  {fund.isinGrowth && (
+                    <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
+                      <span className="text-gray-400">ISIN (Growth):</span>
+                      <span className="font-mono text-gray-200 text-sm">{fund.isinGrowth}</span>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+              
+              {/* Investment Form */}
+              <motion.form 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                onSubmit={handleTransaction} 
+                className="space-y-6"
+              >
+                <div className="space-y-3">
+                  <label className="text-lg font-semibold text-gray-200 flex items-center gap-2">
+                    <FaRupeeSign className="text-green-400" />
+                    Investment Amount
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      min="100"
+                      step="100"
+                      required
+                      placeholder="Enter amount (minimum ₹100)"
+                      className="w-full p-4 pl-12 text-lg bg-slate-700/50 backdrop-blur-sm border 
+                               border-slate-600/50 rounded-2xl text-white placeholder-gray-400 
+                               focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 
+                               transition-all duration-300"
+                    />
+                    <FaRupeeSign className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  </div>
+                  <p className="text-gray-400 text-sm flex items-center gap-2">
+                    <FaInfoCircle className="text-xs" />
+                    Minimum investment: ₹100
+                  </p>
+                </div>
+                
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  disabled={!amount || amount < 100}
+                  className={`w-full py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-300 
+                           shadow-lg flex items-center justify-center gap-2 ${
+                           !amount || amount < 100
+                             ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
+                             : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-green-500/25 hover:shadow-xl'
+                         }`}
+                >
+                  <FaChartLine />
+                  Invest Now
+                </motion.button>
+              </motion.form>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

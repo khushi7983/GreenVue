@@ -141,191 +141,39 @@ const GreenFundSearch = () => {
     );
   });
 
-  const styles = {
-    mainContent: {
-      margin: '20px auto',
-      minHeight: '100vh',
-      width: '100%',
-      maxWidth: '1400px',
-      backgroundColor: '#111827',
-      color: '#f3f4f6',
-      overflowY: 'auto',
-      position: 'relative',
-      padding: '40px 20px'
-    },
-    container: {
-      width: '100%',
-      margin: '0 auto'
-    },
-    header: {
-      marginBottom: '20px'
-    },
-    title: {
-      fontSize: '2.5rem',
-      color: '#10b981',
-      marginBottom: '16px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px'
-    },
-    subtitle: {
-      color: '#d1d5db',
-      fontSize: '1.1rem'
-    },
-    searchContainer: {
-      position: 'relative',
-      width: '100%',
-      marginBottom: '20px'
-    },
-    searchInput: {
-      width: '100%',
-      padding: '16px 48px',
-      fontSize: '1.1rem',
-      backgroundColor: '#1f2937',
-      border: '2px solid #374151',
-      borderRadius: '10px',
-      color: '#f3f4f6',
-      transition: 'all 0.2s ease'
-    },
-    searchInputFocus: {
-      borderColor: '#10b981',
-      boxShadow: '0 0 8px rgba(16, 185, 129, 0.5)'
-    },
-    filterContainer: {
-      backgroundColor: '#1f2937',
-      padding: '24px',
-      borderRadius: '16px',
-      marginBottom: '32px'
-    },
-    filterSection: {
-      marginBottom: '24px'
-    },
-    sectionTitle: {
-      fontSize: '1.2rem',
-      color: '#10b981',
-      marginBottom: '16px'
-    },
-    filterGroup: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '12px'
-    },
-    filterItem: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-      padding: '8px 16px',
-      backgroundColor: '#111827',
-      border: '1px solid #374151',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      color: '#f3f4f6',
-      transition: 'background-color 0.2s ease'
-    },
-    checkbox: {
-      accentColor: '#10b981',
-      cursor: 'pointer'
-    },
-    fundsContainer: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '20px',
-      backgroundColor: '#1f2937',
-      borderRadius: '12px',
-      overflow: 'hidden'
-    },
-    fundCard: {
-      backgroundColor: '#1e293b',
-      padding: '28px',
-      cursor: 'pointer',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '20px',
-      transition: 'transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease',
-      border: '2px solid #374151',
-      borderRadius: '12px'
-    },
-    fundCardHover: {
-      backgroundColor: '#1f2937',
-      transform: 'translateY(-4px)',
-      boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
-      border: '2px solid #374151',
-      borderRadius: '12px'
-    },
-    fundTitle: {
-      fontSize: '1rem',
-      color: '#10b981',
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: '12px',
-      lineHeight: '1.5'
-    },
-    fundIcon: {
-      marginTop: '4px',
-      flexShrink: 0
-    },
-    fundInfo: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '16px'
-    },
-    infoRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      fontSize: '0.9rem',
-      color: '#94a3b8'
-    },
-    infoLabel: {
-      color: '#94a3b8'
-    },
-    infoValue: {
-      color: '#e2e8f0',
-      fontFamily: 'monospace'
-    },
-    loadingMessage: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '12px',
-      padding: '40px',
-      fontSize: '1.2rem',
-      color: '#10b981'
-    },
-    errorMessage: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: '12px',
-      padding: '24px',
-      color: '#ef4444',
-      backgroundColor: '#1f2937',
-      borderRadius: '10px',
-      border: '1px solid #374151'
-    }
-  };
+
 
   return (
-    <div style={styles.mainContent}>
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <h1 style={styles.title}>
-            <FaLeaf style={{ color: '#10b981' }} />
-            Green Investment Funds
-          </h1>
-          <p style={styles.subtitle}>
-            Discover sustainable and environmentally conscious mutual funds
-          </p>
+    <div className="relative overflow-hidden min-h-screen">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-green-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full filter blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/3 rounded-full filter blur-2xl" />
+      </div>
+      
+      <div className="relative bg-transparent text-white p-6 md:p-10">
+        <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="p-3 bg-green-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30">
+              <FaLeaf className="text-2xl text-green-400" />
+            </div>
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+                           bg-clip-text text-transparent">
+                Green Investment Funds
+              </h1>
+              <p className="text-gray-300 text-lg mt-1">
+                Discover sustainable and environmentally conscious mutual funds
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div style={styles.searchContainer}>
-          <FaSearch style={{
-            position: 'absolute',
-            left: '16px',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            color: '#10b981'
-          }} />
+        <div className="relative mb-8">
+          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-green-400 z-10" />
           <input
             type="text"
             placeholder="Search funds..."
@@ -333,162 +181,207 @@ const GreenFundSearch = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
-            style={{
-              ...styles.searchInput,
-              ...(isSearchFocused ? styles.searchInputFocus : {})
-            }}
+            className={`w-full pl-12 pr-4 py-4 text-lg bg-slate-800/50 backdrop-blur-sm border 
+                       rounded-2xl text-white transition-all duration-300 placeholder-gray-400 ${
+                       isSearchFocused 
+                         ? 'border-green-500/50 ring-1 ring-green-500/25 shadow-lg shadow-green-500/10' 
+                         : 'border-slate-700/50 hover:border-slate-600/50'
+                     }`}
           />
         </div>
 
-        <div style={styles.filterContainer}>
-          <div style={styles.filterSection}>
-            <h2 style={styles.sectionTitle}>Fund Categories</h2>
-            <div style={styles.filterGroup}>
-              <label style={styles.filterItem}>
+        <div className="bg-slate-800/30 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 mb-8 
+                      shadow-lg hover:shadow-xl transition-all duration-500">
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-green-400 mb-4 flex items-center gap-2">
+              <FaLeaf className="text-sm" />
+              Fund Categories
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.environmental}
                   onChange={() => handleCategoryChange('environmental')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Environmental
+                <span className="text-gray-200">Environmental</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.social}
                   onChange={() => handleCategoryChange('social')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Social
+                <span className="text-gray-200">Social</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.governance}
                   onChange={() => handleCategoryChange('governance')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Governance
+                <span className="text-gray-200">Governance</span>
               </label>
             </div>
           </div>
 
-          <div style={styles.filterSection}>
-            <h2 style={styles.sectionTitle}>Fund Type</h2>
-            <div style={styles.filterGroup}>
-              <label style={styles.filterItem}>
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-green-400 mb-4 flex items-center gap-2">
+              <FaChartLine className="text-sm" />
+              Fund Type
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.equity}
                   onChange={() => handleCategoryChange('equity')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Equity
+                <span className="text-gray-200">Equity</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.debt}
                   onChange={() => handleCategoryChange('debt')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Debt
+                <span className="text-gray-200">Debt</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.hybrid}
                   onChange={() => handleCategoryChange('hybrid')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Hybrid
+                <span className="text-gray-200">Hybrid</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.index}
                   onChange={() => handleCategoryChange('index')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Index
+                <span className="text-gray-200">Index</span>
               </label>
             </div>
           </div>
 
-          <div style={styles.filterSection}>
-            <h2 style={styles.sectionTitle}>Distribution Type</h2>
-            <div style={styles.filterGroup}>
-              <label style={styles.filterItem}>
+          <div className="mb-0">
+            <h2 className="text-xl font-semibold text-green-400 mb-4 flex items-center gap-2">
+              <FaInfoCircle className="text-sm" />
+              Distribution Type
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.growth}
                   onChange={() => handleCategoryChange('growth')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Growth
+                <span className="text-gray-200">Growth</span>
               </label>
-              <label style={styles.filterItem}>
+              <label className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 backdrop-blur-sm border 
+                              border-slate-600/50 rounded-xl cursor-pointer hover:bg-slate-600/50 
+                              hover:border-green-500/30 transition-all duration-300">
                 <input
                   type="checkbox"
                   checked={filters.dividend}
                   onChange={() => handleCategoryChange('dividend')}
-                  style={styles.checkbox}
+                  className="accent-green-500 cursor-pointer"
                 />
-                Dividend
+                <span className="text-gray-200">Dividend</span>
               </label>
             </div>
           </div>
         </div>
 
         {loading ? (
-          <div style={styles.loadingMessage}>
-            <FaChartLine style={{ animation: 'spin 1s linear infinite' }} />
-            Loading funds...
+          <div className="flex items-center justify-center gap-4 p-12 text-green-400">
+            <div className="animate-spin text-3xl">
+              <FaChartLine />
+            </div>
+            <span className="text-xl font-medium">Loading funds...</span>
           </div>
         ) : error ? (
-          <div style={styles.errorMessage}>
-            <FaExclamationCircle />
-            {error}
+          <div className="flex items-center justify-center gap-4 p-8 bg-red-500/10 border border-red-500/30 
+                        rounded-2xl text-red-400 backdrop-blur-sm">
+            <FaExclamationCircle className="text-2xl" />
+            <span className="text-lg">{error}</span>
           </div>
         ) : (
-          <div style={styles.fundsContainer}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredFunds.length > 0 ? (
               filteredFunds.map((fund) => (
                 <div 
                   key={fund.schemeCode} 
-                  style={{
-                    ...styles.fundCard,
-                    ...(hoveredCard === fund.schemeCode ? styles.fundCardHover : {})
-                  }}
+                  className={`bg-slate-800/50 backdrop-blur-sm p-6 rounded-2xl border cursor-pointer 
+                           transition-all duration-300 group hover:shadow-xl ${
+                           hoveredCard === fund.schemeCode 
+                             ? 'border-green-500/50 shadow-lg shadow-green-500/10 transform -translate-y-1' 
+                             : 'border-slate-700/50 hover:border-slate-600/50'
+                         }`}
                   onMouseEnter={() => setHoveredCard(fund.schemeCode)}
                   onMouseLeave={() => setHoveredCard(null)}
                   onClick={() => handleFundClick(fund)}
                 >
-                  <h3 style={styles.fundTitle}>
-                    <FaLeaf style={styles.fundIcon} />
-                    <span>{fund.schemeName}</span>
-                  </h3>
-                  <div style={styles.fundInfo}>
-                    <div style={styles.infoRow}>
-                      <span style={styles.infoLabel}>Scheme Code:</span>
-                      <span style={styles.infoValue}>{fund.schemeCode}</span>
+                  <div className="flex items-start gap-3 mb-4">
+                    <div className="p-2 bg-green-500/20 rounded-lg group-hover:bg-green-500/30 transition-colors duration-300">
+                      <FaLeaf className="text-green-400 text-sm" />
+                    </div>
+                    <h3 className="text-green-400 font-medium text-sm leading-relaxed group-hover:text-green-300 
+                                 transition-colors duration-300 line-clamp-3">
+                      {fund.schemeName}
+                    </h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-400">Scheme Code:</span>
+                      <span className="text-gray-200 font-mono text-xs">{fund.schemeCode}</span>
                     </div>
                     {fund.isinGrowth && (
-                      <div style={styles.infoRow}>
-                        <span style={styles.infoLabel}>ISIN:</span>
-                        <span style={styles.infoValue}>{fund.isinGrowth}</span>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-400">ISIN:</span>
+                        <span className="text-gray-200 font-mono text-xs">{fund.isinGrowth}</span>
                       </div>
                     )}
                   </div>
                 </div>
               ))
             ) : (
-              <div style={styles.errorMessage}>No green mutual funds found</div>
+              <div className="col-span-full flex items-center justify-center gap-4 p-8 bg-slate-800/30 
+                           border border-slate-700/50 rounded-2xl text-gray-400 backdrop-blur-sm">
+                <FaInfoCircle className="text-2xl" />
+                <span className="text-lg">No green mutual funds found</span>
+              </div>
             )}
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
