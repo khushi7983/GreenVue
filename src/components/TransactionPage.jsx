@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle, FaRupeeSign } from 'react-icons/fa';
+import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle, FaRupeeSign, FaCreditCard, FaSpinner } from 'react-icons/fa';
+import { razorpayConfig, createRazorpayOrder, initializeRazorpay } from '../utils/razorpay';
 
 const TransactionPage = () => {
   const location = useLocation();
@@ -10,6 +11,20 @@ const TransactionPage = () => {
   const [amount, setAmount] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [transaction, setTransaction] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+
+  // Initialize Razorpay
+  useEffect(() => {
+    const loadRazorpay = async () => {
+      const loaded = await initializeRazorpay();
+      setRazorpayLoaded(loaded);
+      if (!loaded) {
+        console.error('Razorpay SDK failed to load');
+      }
+    };
+    loadRazorpay();
+  }, []);
 
   if (!fund) {
     return (
@@ -48,18 +63,85 @@ const TransactionPage = () => {
     );
   }
 
-  const handleTransaction = (e) => {
+  const handleTransaction = async (e) => {
     e.preventDefault();
-    const units = (parseFloat(amount) / 10).toFixed(2); // Dummy calculation
-    const newTransaction = {
-      fund: fund.schemeName,
-      amount: parseFloat(amount),
-      units,
-      date: new Date().toLocaleString(),
-      schemeCode: fund.schemeCode
-    };
-    setTransaction(newTransaction);
-    setShowConfirmation(true);
+    if (!razorpayLoaded) {
+      alert('Payment gateway is not loaded. Please refresh and try again.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Get user details from localStorage
+      const userStr = localStorage.getItem('user');
+      const user = userStr ? JSON.parse(userStr) : null;
+
+      if (!user) {
+        alert('Please login to continue with payment');
+        navigate('/login');
+        return;
+      }
+
+      // Create Razorpay order
+      const order = await createRazorpayOrder(parseFloat(amount), fund.schemeName, user);
+
+      const options = {
+        ...razorpayConfig,
+        amount: order.amount,
+        order_id: order.id,
+        prefill: {
+          name: user.name || 'Investor',
+          email: user.email || '',
+          contact: user.phone || ''
+        },
+        notes: {
+          fund_name: fund.schemeName,
+          scheme_code: fund.schemeCode,
+          investment_type: 'mutual_fund'
+        },
+        handler: function (response) {
+          // Payment successful
+          const units = (parseFloat(amount) / 10).toFixed(2); // Dummy calculation
+          const newTransaction = {
+            fund: fund.schemeName,
+            amount: parseFloat(amount),
+            units,
+            date: new Date().toLocaleString(),
+            schemeCode: fund.schemeCode,
+            paymentId: response.razorpay_payment_id,
+            orderId: response.razorpay_order_id,
+            signature: response.razorpay_signature,
+            status: 'success'
+          };
+          setTransaction(newTransaction);
+          setShowConfirmation(true);
+          setLoading(false);
+        },
+        modal: {
+          ondismiss: function() {
+            setLoading(false);
+          }
+        },
+        theme: {
+          color: razorpayConfig.theme.color
+        }
+      };
+
+      const razorpay = new window.Razorpay(options);
+      
+      razorpay.on('payment.failed', function (response) {
+        console.error('Payment failed:', response.error);
+        alert(`Payment failed: ${response.error.description}`);
+        setLoading(false);
+      });
+
+      razorpay.open();
+    } catch (error) {
+      console.error('Error processing payment:', error);
+      alert('Failed to process payment. Please try again.');
+      setLoading(false);
+    }
   };
 
 
@@ -137,6 +219,25 @@ const TransactionPage = () => {
                     </div>
                     <p className="text-sm font-medium text-gray-300">{transaction.date}</p>
                   </div>
+                  {transaction.paymentId && (
+                    <div className="bg-slate-600/30 p-4 rounded-xl border border-slate-500/30 md:col-span-2">
+                      <div className="flex items-center gap-2 text-purple-400 mb-2">
+                        <FaCreditCard />
+                        <span className="font-medium">Payment Details</span>
+                      </div>
+                      <div className="space-y-1 text-sm">
+                        <p className="text-gray-300">
+                          <span className="text-gray-400">Payment ID:</span> {transaction.paymentId}
+                        </p>
+                        <p className="text-gray-300">
+                          <span className="text-gray-400">Order ID:</span> {transaction.orderId}
+                        </p>
+                        <p className="text-green-400 font-medium">
+                          <span className="text-gray-400">Status:</span> Payment Successful ✓
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
               
@@ -293,20 +394,44 @@ const TransactionPage = () => {
                 </div>
                 
                 <motion.button 
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: loading ? 1 : 1.02 }}
+                  whileTap={{ scale: loading ? 1 : 0.98 }}
                   type="submit"
-                  disabled={!amount || amount < 100}
+                  disabled={!amount || amount < 100 || loading || !razorpayLoaded}
                   className={`w-full py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-300 
                            shadow-lg flex items-center justify-center gap-2 ${
-                           !amount || amount < 100
+                           !amount || amount < 100 || loading || !razorpayLoaded
                              ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
                              : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-green-500/25 hover:shadow-xl'
                          }`}
                 >
-                  <FaChartLine />
-                  Invest Now
+                  {loading ? (
+                    <>
+                      <FaSpinner className="animate-spin" />
+                      Processing Payment...
+                    </>
+                  ) : !razorpayLoaded ? (
+                    <>
+                      <FaInfoCircle />
+                      Loading Payment Gateway...
+                    </>
+                  ) : (
+                    <>
+                      <FaCreditCard />
+                      Pay with Razorpay
+                    </>
+                  )}
                 </motion.button>
+                
+                {razorpayLoaded && (
+                  <div className="text-center text-sm text-gray-400 mt-4">
+                    <p className="flex items-center justify-center gap-2">
+                      <FaCreditCard className="text-green-400" />
+                      Secure payment powered by Razorpay
+                    </p>
+                    <p className="mt-1">Supports UPI, Cards, Net Banking, and Wallets</p>
+                  </div>
+                )}
               </motion.form>
             </div>
           </motion.div>

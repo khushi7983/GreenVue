@@ -21,7 +21,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "ml-knn": "^3.0.0",
-    "mongoose": "^8.19.4"
+    "mongoose": "^8.19.4",
+    "razorpay": "^2.9.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
