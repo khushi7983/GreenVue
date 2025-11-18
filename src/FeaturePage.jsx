@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { FaLeaf, FaChartLine, FaMoneyBillWave, FaNewspaper, FaUsers, FaCalculator, FaGavel } from "react-icons/fa";
+import { FaLeaf, FaChartLine, FaMoneyBillWave, FaNewspaper, FaUsers, FaCalculator, FaGavel, FaBalanceScale } from "react-icons/fa";
 import ImpactCalculator from "./components/ImpactCalculator";
 import SustainabilityScore from "./components/SustainabilityScore";
 import GreenNews from './components/GreenNews';
 import GreenMutualFund from './components/GreenMutualFund';
 import GreenFundSearch from './components/GreenFundSearch';
 import ESGEducation from './components/ESGEducation';
+import FundComparison from './components/FundComparison';
 import { useNavigate } from 'react-router-dom';
 
 const features = [
   // { name: "Sustainability Score System", icon: <FaLeaf />, component: <SustainabilityScore /> },
   { name: "ESG Investment Guide", icon: <FaLeaf />, component: <ESGEducation /> },
   { name: "Green Mutual Fund", icon: <FaGavel />, component: <GreenFundSearch /> },
-  { name: "ESG Funds Explorer", icon: <FaMoneyBillWave />, component: <GreenMutualFund /> },
+  { name: "Fund Comparison Tool", icon: <FaBalanceScale />, component: <FundComparison /> },
   { name: "Impact Calculator", icon: <FaCalculator />, component: <ImpactCalculator /> },
   { name: "Live Green Investment News", icon: <FaNewspaper />, component: <GreenNews /> },
   { name: "Community", icon: <FaUsers />, component: null },
