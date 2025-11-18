@@ -10,17 +10,27 @@ export const razorpayConfig = {
   }
 };
 
-export const createRazorpayOrder = async (amount, fundName, userDetails) => {
+export const createRazorpayOrder = async (amount, fundName, fundSymbol, navPrice, userDetails = {}) => {
   try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication required');
+    }
+
+    const units = (amount / navPrice).toFixed(4);
+
     const response = await fetch('http://localhost:5000/api/payment/create-order', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         amount,
         fundName,
+        fundSymbol,
+        navPrice,
+        units: parseFloat(units),
         userDetails
       })
     });
@@ -31,23 +41,47 @@ export const createRazorpayOrder = async (amount, fundName, userDetails) => {
       throw new Error(data.message || 'Failed to create payment order');
     }
 
-    // Return order with key for frontend use
+    // Return order data from backend
     return {
-      ...data.order,
-      key: data.key // Backend will provide the key
+      id: data.orderId,
+      amount: data.amount,
+      currency: data.currency,
+      key: data.key,
+      receipt: data.receipt
     };
   } catch (error) {
     console.error('Error creating Razorpay order:', error);
-    // Fallback to mock order for testing if server is not available
-    const orderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
-    return {
-      id: orderId,
-      amount: amount * 100, // Razorpay expects amount in paise
-      currency: 'INR',
-      receipt: `rcpt_${orderId}`,
-      status: 'created'
-    };
+    throw error; // Re-throw to handle in calling function
+  }
+};
+
+// Verify payment on backend
+export const verifyRazorpayPayment = async (paymentData) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication required');
+    }
+
+    const response = await fetch('http://localhost:5000/api/payment/verify-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },  
+      body: JSON.stringify(paymentData)
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message || 'Payment verification failed');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error verifying payment:', error);
+    throw error;
   }
 };
 

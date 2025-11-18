@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle, FaRupeeSign, FaCreditCard, FaSpinner } from 'react-icons/fa';
-import { razorpayConfig, createRazorpayOrder, initializeRazorpay } from '../utils/razorpay';
+import { razorpayConfig, createRazorpayOrder, verifyRazorpayPayment, initializeRazorpay } from '../utils/razorpay';
 
 const TransactionPage = () => {
   const location = useLocation();
@@ -83,8 +83,15 @@ const TransactionPage = () => {
         return;
       }
 
-      // Create Razorpay order
-      const order = await createRazorpayOrder(parseFloat(amount), fund.schemeName, user);
+      // Create Razorpay order with fund details
+      const navPrice = 10; // You can get this from fund data or API
+      const order = await createRazorpayOrder(
+        parseFloat(amount), 
+        fund.schemeName, 
+        fund.schemeCode,
+        navPrice,
+        user
+      );
 
       const options = {
         ...razorpayConfig,
@@ -101,22 +108,40 @@ const TransactionPage = () => {
           scheme_code: fund.schemeCode,
           investment_type: 'mutual_fund'
         },
-        handler: function (response) {
-          // Payment successful
-          const units = (parseFloat(amount) / 10).toFixed(2); // Dummy calculation
-          const newTransaction = {
-            fund: fund.schemeName,
-            amount: parseFloat(amount),
-            units,
-            date: new Date().toLocaleString(),
-            schemeCode: fund.schemeCode,
-            paymentId: response.razorpay_payment_id,
-            orderId: response.razorpay_order_id,
-            signature: response.razorpay_signature,
-            status: 'success'
-          };
-          setTransaction(newTransaction);
-          setShowConfirmation(true);
+        handler: async function (response) {
+          try {
+            // Verify payment on backend
+            const verificationData = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            };
+
+            const verificationResult = await verifyRazorpayPayment(verificationData);
+            
+            if (verificationResult.success) {
+              // Payment verified successfully
+              const newTransaction = {
+                fund: fund.schemeName,
+                amount: parseFloat(amount),
+                units: verificationResult.transaction.units,
+                date: new Date().toLocaleString(),
+                schemeCode: fund.schemeCode,
+                paymentId: response.razorpay_payment_id,
+                orderId: response.razorpay_order_id,
+                signature: response.razorpay_signature,
+                status: 'success',
+                transactionId: verificationResult.transaction.id
+              };
+              setTransaction(newTransaction);
+              setShowConfirmation(true);
+            } else {
+              throw new Error('Payment verification failed');
+            }
+          } catch (error) {
+            console.error('Payment verification error:', error);
+            alert('Payment successful but verification failed. Please contact support.');
+          }
           setLoading(false);
         },
         modal: {

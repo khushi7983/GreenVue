@@ -121,6 +121,16 @@ const Navbar = ({ onGetStarted }) => {
               Features {!isAuthenticated && <span className="text-xs text-yellow-400 ml-1">*</span>}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
             </button>
+            {isAuthenticated && (
+              <button 
+                onClick={() => navigate('/portfolio')} 
+                className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
+                           relative group"
+              >
+                Portfolio
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+              </button>
+            )}
             <a href="#faq" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
                                    relative group">
               FAQ
@@ -207,6 +217,13 @@ const Navbar = ({ onGetStarted }) => {
                className="block text-left w-full text-gray-300 hover:text-green-400 transition-colors font-medium">
               Features {!isAuthenticated && <span className="text-xs text-yellow-400 ml-1">*</span>}
             </button>
+            {isAuthenticated && (
+              <button 
+                onClick={() => {navigate('/portfolio'); setIsMobileMenuOpen(false);}}
+                className="block text-left w-full text-gray-300 hover:text-green-400 transition-colors font-medium">
+                Portfolio
+              </button>
+            )}
             <a href="#faq" 
                onClick={() => setIsMobileMenuOpen(false)}
                className="block text-gray-300 hover:text-green-400 transition-colors font-medium">

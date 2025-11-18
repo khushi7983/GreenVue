@@ -5,6 +5,7 @@ import FeaturePage from './FeaturePage'
 import GreenFundSearch from './components/GreenFundSearch'
 import BuyStock from './components/BuyStock'
 import TransactionPage from './components/TransactionPage'
+import PortfolioPage from './components/PortfolioPage'
 import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import AuthTest from './components/auth/AuthTest'
@@ -39,6 +40,11 @@ function App() {
           <Route path="/transaction" element={
             <ProtectedRoute>
               <TransactionPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/portfolio" element={
+            <ProtectedRoute>
+              <PortfolioPage />
             </ProtectedRoute>
           } />
           <Route path="/auth-test" element={

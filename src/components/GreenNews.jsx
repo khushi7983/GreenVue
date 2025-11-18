@@ -15,7 +15,7 @@ const GreenNews = () => {
       }
       const data = await response.json();
       console.log('Received news data:', data); // Debug log
-      setNews(data);
+      setNews(data.success ? data.data : []);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching news:', err); // Debug log
