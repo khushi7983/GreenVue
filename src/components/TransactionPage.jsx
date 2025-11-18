@@ -88,6 +88,7 @@ const TransactionPage = () => {
 
       const options = {
         ...razorpayConfig,
+        key: order.key, // Use key from backend response
         amount: order.amount,
         order_id: order.id,
         prefill: {

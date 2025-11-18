@@ -1,7 +1,6 @@
 // Razorpay configuration and utility functions
 export const razorpayConfig = {
-  // Using actual test key
-  key: 'rzp_test_RFA4WduzM8QkXb',
+  // Key will be provided by backend in order response for security
   currency: 'INR',
   name: 'GreenVue',
   description: 'Green Mutual Fund Investment',
@@ -32,7 +31,11 @@ export const createRazorpayOrder = async (amount, fundName, userDetails) => {
       throw new Error(data.message || 'Failed to create payment order');
     }
 
-    return data.order;
+    // Return order with key for frontend use
+    return {
+      ...data.order,
+      key: data.key // Backend will provide the key
+    };
   } catch (error) {
     console.error('Error creating Razorpay order:', error);
     // Fallback to mock order for testing if server is not available

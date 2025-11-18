@@ -41,6 +41,7 @@ router.post('/create-order', async (req, res) => {
 
     res.json({
       success: true,
+      key: razorpayKeyId, // Provide key to frontend securely
       order: {
         id: order.id,
         amount: order.amount,
