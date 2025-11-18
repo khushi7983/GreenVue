@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaLeaf, FaChartLine, FaMoneyBillWave, FaNewspaper, FaUsers, FaCalculator, FaGavel, FaBalanceScale } from "react-icons/fa";
+import { FaLeaf, FaChartLine, FaMoneyBillWave, FaNewspaper, FaRobot, FaCalculator, FaGavel, FaBalanceScale } from "react-icons/fa";
 import ImpactCalculator from "./components/ImpactCalculator";
 import SustainabilityScore from "./components/SustainabilityScore";
 import GreenNews from './components/GreenNews';
@@ -7,6 +7,7 @@ import GreenMutualFund from './components/GreenMutualFund';
 import GreenFundSearch from './components/GreenFundSearch';
 import ESGEducation from './components/ESGEducation';
 import FundComparison from './components/FundComparison';
+import AIInvestmentAssistant from './components/AIInvestmentAssistant';
 import { useNavigate } from 'react-router-dom';
 
 const features = [
@@ -16,7 +17,7 @@ const features = [
   { name: "Fund Comparison Tool", icon: <FaBalanceScale />, component: <FundComparison /> },
   { name: "Impact Calculator", icon: <FaCalculator />, component: <ImpactCalculator /> },
   { name: "Live Green Investment News", icon: <FaNewspaper />, component: <GreenNews /> },
-  { name: "Community", icon: <FaUsers />, component: null },
+  { name: "AI Investment Assistant", icon: <FaRobot />, component: <AIInvestmentAssistant /> },
 ];
 
 const FeaturePage = () => {
