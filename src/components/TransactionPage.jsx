@@ -13,6 +13,8 @@ const TransactionPage = () => {
   const [transaction, setTransaction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+  const [navPrice, setNavPrice] = useState(null);
+  const [navLoading, setNavLoading] = useState(true);
 
   // Initialize Razorpay
   useEffect(() => {
@@ -25,6 +27,37 @@ const TransactionPage = () => {
     };
     loadRazorpay();
   }, []);
+
+  // Fetch NAV price when component loads
+  useEffect(() => {
+    const fetchNavPrice = async () => {
+      if (!fund?.schemeCode) {
+        setNavLoading(false);
+        return;
+      }
+
+      try {
+        setNavLoading(true);
+        const response = await fetch(`http://localhost:5000/api/payment/nav/${fund.schemeCode}`);
+        const data = await response.json();
+        
+        if (data.success && data.nav) {
+          setNavPrice(data.nav);
+        } else {
+          // Fallback to a default NAV if API fails
+          setNavPrice(10);
+          console.warn('NAV API failed, using fallback price');
+        }
+      } catch (error) {
+        console.error('Error fetching NAV:', error);
+        setNavPrice(10); // Fallback price
+      } finally {
+        setNavLoading(false);
+      }
+    };
+
+    fetchNavPrice();
+  }, [fund?.schemeCode]);
 
   if (!fund) {
     return (
@@ -84,7 +117,12 @@ const TransactionPage = () => {
       }
 
       // Create Razorpay order with fund details
-      const navPrice = 10; // You can get this from fund data or API
+      if (!navPrice) {
+        alert('NAV price is still loading. Please wait a moment and try again.');
+        setLoading(false);
+        return;
+      }
+      
       const order = await createRazorpayOrder(
         parseFloat(amount), 
         fund.schemeName, 
@@ -375,10 +413,31 @@ const TransactionPage = () => {
                     <span className="text-gray-400">Scheme Code:</span>
                     <span className="font-mono text-gray-200">{fund.schemeCode}</span>
                   </div>
+                  <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
+                    <span className="text-gray-400">Current NAV:</span>
+                    <span className="font-semibold text-green-400 flex items-center gap-2">
+                      {navLoading ? (
+                        <>
+                          <FaSpinner className="animate-spin text-sm" />
+                          Loading...
+                        </>
+                      ) : (
+                        `₹${navPrice?.toFixed(2) || 'N/A'}`
+                      )}
+                    </span>
+                  </div>
                   {fund.isinGrowth && (
                     <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
                       <span className="text-gray-400">ISIN (Growth):</span>
                       <span className="font-mono text-gray-200 text-sm">{fund.isinGrowth}</span>
+                    </div>
+                  )}
+                  {amount && navPrice && (
+                    <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
+                      <span className="text-gray-400">Units to be allotted:</span>
+                      <span className="font-semibold text-blue-400">
+                        {(parseFloat(amount) / navPrice).toFixed(4)} units
+                      </span>
                     </div>
                   )}
                 </div>
@@ -423,10 +482,10 @@ const TransactionPage = () => {
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                   type="submit"
-                  disabled={!amount || amount < 100 || loading || !razorpayLoaded}
+                  disabled={!amount || amount < 100 || loading || !razorpayLoaded || navLoading || !navPrice}
                   className={`w-full py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-300 
                            shadow-lg flex items-center justify-center gap-2 ${
-                           !amount || amount < 100 || loading || !razorpayLoaded
+                           !amount || amount < 100 || loading || !razorpayLoaded || navLoading || !navPrice
                              ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
                              : 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-green-500/25 hover:shadow-xl'
                          }`}
@@ -436,10 +495,20 @@ const TransactionPage = () => {
                       <FaSpinner className="animate-spin" />
                       Processing Payment...
                     </>
+                  ) : navLoading ? (
+                    <>
+                      <FaSpinner className="animate-spin" />
+                      Loading NAV Price...
+                    </>
                   ) : !razorpayLoaded ? (
                     <>
                       <FaInfoCircle />
                       Loading Payment Gateway...
+                    </>
+                  ) : !navPrice ? (
+                    <>
+                      <FaInfoCircle />
+                      NAV Price Unavailable
                     </>
                   ) : (
                     <>

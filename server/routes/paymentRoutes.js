@@ -4,7 +4,9 @@ import {
   verifyPayment, 
   getUserTransactions, 
   getTransactionById,
-  getPortfolioSummary 
+  getPortfolioSummary,
+  getCurrentNavs,
+  getFundNav
 } from '../controllers/transactionController.js';
 import { authenticate } from '../middleware/auth.js';
 
@@ -24,5 +26,11 @@ router.get('/transactions/:id', authenticate, getTransactionById);
 
 // Get user's portfolio summary
 router.get('/portfolio', authenticate, getPortfolioSummary);
+
+// Get current NAV prices
+router.get('/nav-prices', authenticate, getCurrentNavs);
+
+// Get NAV for specific fund scheme code
+router.get('/fund-nav/:schemeCode', getFundNav);
 
 export default router;
