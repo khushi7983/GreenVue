@@ -72,20 +72,20 @@ const TransactionPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 text-center max-w-md"
+            className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 text-center max-w-sm"
           >
-            <div className="p-4 bg-red-500/20 rounded-2xl mb-6 inline-block">
-              <FaInfoCircle className="text-3xl text-red-400" />
+            <div className="p-3 bg-red-500/20 rounded-xl mb-4 inline-block">
+              <FaInfoCircle className="text-2xl text-red-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-200 mb-4">No Fund Selected</h2>
-            <p className="text-gray-400 mb-6">Please go back and select a fund to proceed with your investment.</p>
+            <h2 className="text-xl font-bold text-gray-200 mb-3">No Fund Selected</h2>
+            <p className="text-gray-400 mb-4 text-sm">Please go back and select a fund to proceed with your investment.</p>
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/green-funds')}
               className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 
-                       text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 
-                       shadow-lg hover:shadow-green-500/25 flex items-center gap-2 mx-auto"
+                       text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 
+                       shadow-lg hover:shadow-green-500/25 flex items-center gap-2 mx-auto text-sm"
             >
               <FaLeaf />
               Back to Funds
@@ -246,8 +246,8 @@ const TransactionPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
-                         bg-clip-text text-transparent mb-8"
+                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+                         bg-clip-text text-transparent mb-6"
               >
                 Investment Successful!
               </motion.h2>
@@ -256,15 +256,15 @@ const TransactionPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="bg-slate-700/50 backdrop-blur-sm p-6 rounded-2xl border border-slate-600/50 mb-8"
+                className="bg-slate-700/50 backdrop-blur-sm p-5 rounded-xl border border-slate-600/50 mb-6"
               >
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <FaRupeeSign className="text-green-400" />
-                  <p className="text-xl text-gray-200">
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <FaRupeeSign className="text-green-400 text-sm" />
+                  <p className="text-lg text-gray-200">
                     You have invested <span className="font-bold text-green-400">₹{transaction.amount.toLocaleString()}</span> in
                   </p>
                 </div>
-                <p className="text-xl font-semibold text-green-300 mb-6 leading-relaxed">
+                <p className="text-lg font-semibold text-green-300 mb-4 leading-relaxed">
                   {transaction.fund}
                 </p>
                 
@@ -402,19 +402,19 @@ const TransactionPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-slate-700/30 backdrop-blur-sm p-6 rounded-2xl border border-slate-600/50 mb-8"
+                className="bg-slate-700/30 backdrop-blur-sm p-4 rounded-xl border border-slate-600/50 mb-6"
               >
-                <h3 className="text-lg font-semibold text-gray-200 mb-4 flex items-center gap-2">
-                  <FaInfoCircle className="text-green-400" />
+                <h3 className="text-base font-semibold text-gray-200 mb-3 flex items-center gap-2">
+                  <FaInfoCircle className="text-green-400 text-sm" />
                   Fund Details
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
-                    <span className="text-gray-400">Scheme Code:</span>
-                    <span className="font-mono text-gray-200">{fund.schemeCode}</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="flex justify-between items-center py-2 border-b border-slate-600/30">
+                    <span className="text-gray-400 text-sm">Scheme Code:</span>
+                    <span className="font-mono text-gray-200 text-sm">{fund.schemeCode}</span>
                   </div>
-                  <div className="flex justify-between items-center py-3 border-b border-slate-600/30">
-                    <span className="text-gray-400">Current NAV:</span>
+                  <div className="flex justify-between items-center py-2 border-b border-slate-600/30">
+                    <span className="text-gray-400 text-sm">Current NAV:</span>
                     <span className="font-semibold text-green-400 flex items-center gap-2">
                       {navLoading ? (
                         <>
@@ -451,9 +451,9 @@ const TransactionPage = () => {
                 onSubmit={handleTransaction} 
                 className="space-y-6"
               >
-                <div className="space-y-3">
-                  <label className="text-lg font-semibold text-gray-200 flex items-center gap-2">
-                    <FaRupeeSign className="text-green-400" />
+                <div className="space-y-2">
+                  <label className="text-base font-semibold text-gray-200 flex items-center gap-2">
+                    <FaRupeeSign className="text-green-400 text-sm" />
                     Investment Amount
                   </label>
                   <div className="relative">
@@ -465,8 +465,8 @@ const TransactionPage = () => {
                       step="100"
                       required
                       placeholder="Enter amount (minimum ₹100)"
-                      className="w-full p-4 pl-12 text-lg bg-slate-700/50 backdrop-blur-sm border 
-                               border-slate-600/50 rounded-2xl text-white placeholder-gray-400 
+                      className="w-full p-3 pl-10 text-base bg-slate-700/50 backdrop-blur-sm border 
+                               border-slate-600/50 rounded-xl text-white placeholder-gray-400 
                                focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 
                                transition-all duration-300"
                     />
@@ -483,7 +483,7 @@ const TransactionPage = () => {
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                   type="submit"
                   disabled={!amount || amount < 100 || loading || !razorpayLoaded || navLoading || !navPrice}
-                  className={`w-full py-4 px-8 rounded-2xl font-semibold text-lg transition-all duration-300 
+                  className={`w-full py-3 px-6 rounded-xl font-medium text-base transition-all duration-300 
                            shadow-lg flex items-center justify-center gap-2 ${
                            !amount || amount < 100 || loading || !razorpayLoaded || navLoading || !navPrice
                              ? 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
