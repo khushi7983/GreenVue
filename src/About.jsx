@@ -55,7 +55,7 @@ const AboutUs = () => {
                 className="text-lg text-gray-300 mb-6 leading-relaxed"
               >
                 At <span className="text-green-400 font-semibold bg-green-400/10 px-2 py-1 rounded-lg">GreenVue</span>, 
-                we've revolutionized sustainable investing with cutting-edge AI technology and real-time analytics. 
+                we've revolutionized sustainable investing with real-time analytics. 
                 Our advanced platform combines intelligent recommendations with comprehensive ESG fund analysis to maximize both your returns and environmental impact.
               </motion.p>
 
@@ -67,8 +67,7 @@ const AboutUs = () => {
                 className="text-lg text-gray-300 mb-6 leading-relaxed"
               >
                 Powered by Google's Gemini AI and live market data integration, GreenVue offers personalized investment strategies, 
-                real-time portfolio impact tracking, and sophisticated fund comparison tools. Experience the future of ESG investing 
-                where technology meets sustainability.
+                real-time portfolio impact tracking, and sophisticated fund comparison tools.
               </motion.p>
 
               <motion.div
@@ -85,9 +84,8 @@ const AboutUs = () => {
                     <Globe className="w-5 h-5 text-green-400" />
                   </div>
                   <p className="text-lg text-green-300 font-semibold leading-relaxed">
-                    Beyond traditional investment platforms, GreenVue delivers institutional-grade analytics with consumer-friendly interfaces. 
-                    Our AI assistant provides 24/7 investment guidance, while real-time NAV integration ensures you always have the most current market data. 
-                    Transform your investment journey with intelligent, sustainable, and profitable decisions.
+                    Beyond traditional investment platforms, GreenVue delivers analytics with consumer-friendly interfaces. 
+                    Our AI assistant provides 24/7 investment guidance,Transform your investment journey with intelligent, sustainable, and profitable decisions.
                   </p>
                 </div>
                   </motion.div>

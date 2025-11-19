@@ -60,7 +60,7 @@ const Working = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-gray-400 text-lg max-w-2xl mx-auto"
             >
-              Start your sustainable investing journey in three simple steps
+              Experience intelligent ESG investing with AI-powered guidance and real-time analytics
             </motion.p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -90,10 +90,10 @@ const Working = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
                                transition-colors duration-300">
-                  Learn About ESG Funds
+                  Chat with AI Assistant
                 </h3>
                 <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
-                  Discover the power of sustainable investing and how ESG funds create positive environmental and social impact.
+                  Get personalized investment recommendations powered by Google Gemini AI. Complete risk assessment and receive tailored ESG fund suggestions.
                 </p>
               </div>
             </motion.div>
@@ -124,10 +124,10 @@ const Working = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
                                transition-colors duration-300">
-                  Calculate Your Investment
+                  Analyze & Compare Funds
                 </h3>
                 <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
-                  Use our smart calculator to determine the optimal allocation of your income toward sustainable investments.
+                  Access real-time NAV prices and comprehensive fund comparisons. Analyze expense ratios, returns, and ESG scores side-by-side.
                 </p>
               </div>
             </motion.div>
@@ -157,10 +157,10 @@ const Working = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-green-400 group-hover:text-green-300 
                                transition-colors duration-300">
-                  Simulate & Track Impact
+                  Invest & Track Impact
                 </h3>
                 <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
-                  Make virtual investments, monitor your portfolio performance, and visualize your positive impact.
+                  Execute real investments with live NAV pricing and track your environmental impact in real-time with dynamic portfolio analytics.
                 </p>
               </div>
             </motion.div>
@@ -196,7 +196,7 @@ const Working = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-gray-400 text-lg max-w-2xl mx-auto"
             >
-              Select the perfect plan to start your sustainable investing journey
+              Choose the plan that fits your investment goals and unlock advanced AI-powered features
             </motion.p>
           </motion.div>
           <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -218,15 +218,15 @@ const Working = () => {
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">Basic Portfolio Analysis</span>
+                  <span className="text-white">Basic AI Recommendations</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">Market Updates</span>
+                  <span className="text-white">Real-time NAV Prices</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">Community Access</span>
+                  <span className="text-white">Fund Comparison Tool</span>
                 </li>
               </ul>
               <button 
@@ -261,15 +261,15 @@ const Working = () => {
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-white w-5 h-5" />
-                  <span>Advanced Analytics</span>
+                  <span>Advanced AI Analytics</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-white w-5 h-5" />
-                  <span>Priority Support</span>
+                  <span>Portfolio Impact Tracking</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-white w-5 h-5" />
-                  <span>Expert Consultation</span>
+                  <span>Goal-Based Planning</span>
                 </li>
               </ul>
               <button 
@@ -289,15 +289,15 @@ const Working = () => {
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">Custom Solutions</span>
+                  <span className="text-white">White-label AI Platform</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">Dedicated Manager</span>
+                  <span className="text-white">Custom AI Training</span>
                 </li>
                 <li className="flex items-center justify-center gap-2">
                   <FaCheck className="text-green-500 w-5 h-5" />
-                  <span className="text-white">API Access</span>
+                  <span className="text-white">API & Integration</span>
                 </li>
               </ul>
               <button 
