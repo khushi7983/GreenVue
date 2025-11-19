@@ -13,7 +13,7 @@ const Working = () => {
   };
 
   const handleGoPro = () => {
-    navigate('/features');
+    navigate('/features/ai-assistant');
   };
 
   const handleContactSales = () => {
