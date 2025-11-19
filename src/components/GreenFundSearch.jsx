@@ -153,27 +153,27 @@ const GreenFundSearch = () => {
         <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/3 rounded-full filter blur-2xl" />
       </div>
       
-      <div className="relative bg-transparent text-white p-6 md:p-10">
-        <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-green-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30">
-              <FaLeaf className="text-2xl text-green-400" />
+      <div className="relative bg-transparent text-white p-4 md:p-6">
+        <div className="max-w-6xl mx-auto">
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2 bg-green-500/20 rounded-xl backdrop-blur-sm border border-green-500/30">
+              <FaLeaf className="text-lg text-green-400" />
             </div>
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+              <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
                            bg-clip-text text-transparent">
-                Green Investment Funds
+                Green Mutual Funds
               </h1>
-              <p className="text-gray-300 text-lg mt-1">
-                Discover sustainable and environmentally conscious mutual funds
+              <p className="text-gray-300 text-base mt-1">
+                Discover sustainable mutual funds
               </p>
             </div>
           </div>
         </div>
 
-        <div className="relative mb-8">
-          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-green-400 z-10" />
+        <div className="relative mb-6">
+          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 z-10" />
           <input
             type="text"
             placeholder="Search funds..."
@@ -181,8 +181,8 @@ const GreenFundSearch = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setIsSearchFocused(true)}
             onBlur={() => setIsSearchFocused(false)}
-            className={`w-full pl-12 pr-4 py-4 text-lg bg-slate-800/50 backdrop-blur-sm border 
-                       rounded-2xl text-white transition-all duration-300 placeholder-gray-400 ${
+            className={`w-full pl-10 pr-4 py-3 text-base bg-slate-800/50 backdrop-blur-sm border 
+                       rounded-xl text-white transition-all duration-300 placeholder-gray-400 ${
                        isSearchFocused 
                          ? 'border-green-500/50 ring-1 ring-green-500/25 shadow-lg shadow-green-500/10' 
                          : 'border-slate-700/50 hover:border-slate-600/50'
@@ -190,10 +190,10 @@ const GreenFundSearch = () => {
           />
         </div>
 
-        <div className="bg-slate-800/30 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/50 mb-8 
-                      shadow-lg hover:shadow-xl transition-all duration-500">
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-green-400 mb-4 flex items-center gap-2">
+        <div className="bg-slate-800/30 backdrop-blur-sm p-4 rounded-xl border border-slate-700/50 mb-6 
+                      shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-green-400 mb-3 flex items-center gap-2">
               <FaLeaf className="text-sm" />
               Fund Categories
             </h2>

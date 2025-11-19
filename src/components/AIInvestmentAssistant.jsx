@@ -99,22 +99,22 @@ const ChatInterface = React.memo(({
       <div className="flex gap-2 mt-3 flex-wrap">
         <button
           onClick={handleRiskAssessment}
-          className="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-sm text-gray-300 
-                   rounded-lg transition-colors"
+          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
+                   rounded-md transition-colors"
         >
           Risk Assessment
         </button>
         <button
           onClick={handleFundRecommendations}
-          className="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-sm text-gray-300 
-                   rounded-lg transition-colors"
+          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
+                   rounded-md transition-colors"
         >
           Fund Recommendations
         </button>
         <button
           onClick={handleGoalPlanning}
-          className="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-sm text-gray-300 
-                   rounded-lg transition-colors"
+          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
+                   rounded-md transition-colors"
         >
           Goal Planning
         </button>
@@ -129,7 +129,7 @@ const AIInvestmentAssistant = () => {
     {
       id: 1,
       type: 'bot',
-      content: 'Hello! I\'m your AI Investment Assistant. I can help you with fund recommendations, risk assessment, goal planning, and portfolio optimization. What can I help you with today?',
+      content: 'Hello! I\'m your AI Investment Assistant. I can help with fund recommendations, risk assessment, and goal planning. How can I help you today?',
       timestamp: new Date()
     }
   ]);
@@ -583,35 +583,35 @@ const AIInvestmentAssistant = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
-      <div className="bg-slate-800/30 border-b border-slate-600/30 p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-4">
+      <div className="bg-slate-800/30 border-b border-slate-600/30 p-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <FaRobot className="text-3xl text-green-400" />
-              <h1 className="text-3xl font-bold text-white">AI Investment Assistant</h1>
+              <FaRobot className="text-2xl text-green-400" />
+              <h1 className="text-2xl lg:text-3xl font-bold text-white">AI Investment Assistant</h1>
             </div>
             
             {/* AI Status Indicator */}
-            <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm ${
+            <div className={`flex items-center gap-2 px-2 py-1 rounded-full text-xs ${
               isAIConfigured 
                 ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
                 : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
             }`}>
-              <div className={`w-2 h-2 rounded-full ${isAIConfigured ? 'bg-green-400' : 'bg-yellow-400'}`} />
+              <div className={`w-1.5 h-1.5 rounded-full ${isAIConfigured ? 'bg-green-400' : 'bg-yellow-400'}`} />
               {isAIConfigured ? 'AI Powered' : 'Demo Mode'}
             </div>
           </div>
-          <p className="text-gray-400">
-            Get personalized investment advice, risk assessment, and portfolio optimization 
-            {isAIConfigured ? ' powered by Google Gemini AI' : ' with smart fallback responses'}
+          <p className="text-gray-400 text-sm">
+            Get personalized investment advice and portfolio optimization 
+            {isAIConfigured ? ' powered by Google Gemini AI' : ' with smart responses'}
           </p>
           {!isAIConfigured && (
-            <div className="mt-2 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <p className="text-yellow-300 text-sm">
-                💡 <strong>Tip:</strong> Configure Gemini API key in .env file for intelligent AI responses. 
-                Get free API key from <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-200">makersuite.google.com</a>
+            <div className="mt-2 p-2.5 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+              <p className="text-yellow-300 text-xs">
+                💡 <strong>Tip:</strong> Configure Gemini API key in .env file for AI responses. 
+                Get API key from <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-200">makersuite.google.com</a>
               </p>
             </div>
           )}

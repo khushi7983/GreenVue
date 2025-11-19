@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaLeaf, FaWater, FaSeedling, FaUsers, FaSolarPanel, FaChartLine, FaSpinner, FaGlobe, FaIndustry, FaSync } from 'react-icons/fa';
+import { FaLeaf, FaWater, FaSeedling, FaUsers, FaSolarPanel, FaChartLine, FaSpinner, FaGlobe, FaIndustry, FaSync , FaCalculator,FaInfoCircle} from 'react-icons/fa';
 
 const ImpactCalculator = () => {
   const [investment, setInvestment] = useState('');
@@ -33,7 +33,7 @@ const ImpactCalculator = () => {
           water: Math.round((800 + Math.random() * 400) * seasonalMultiplier * regionalMultiplier),
           energy: Math.round((450 + Math.random() * 200) * seasonalMultiplier * marketConditions),
           social: Math.round((1.5 + Math.random() * 1) * regionalMultiplier),
-          biodiversity: (0.015 + Math.random() * 0.015) * seasonalMultiplier,
+          // biodiversity: (0.015 + Math.random() * 0.015) * seasonalMultiplier,
           waste: Math.round((50 + Math.random() * 30) * regionalMultiplier)
         },
         social: {
@@ -70,7 +70,7 @@ const ImpactCalculator = () => {
       
       // Fallback factors
       setImpactFactors({
-        environmental: { co2: 0.5, water: 1000, energy: 500, social: 2, biodiversity: 0.02, waste: 65 },
+        environmental: { co2: 0.5, water: 1000, energy: 500, social: 2, waste: 65 },
         social: { co2: 0.3, water: 800, energy: 300, social: 5, education: 1, healthcare: 1.5 },
         governance: { co2: 0.4, water: 900, energy: 400, social: 3, transparency: 4, compliance: 2.5 },
         cleantech: { co2: 0.8, water: 1500, energy: 1000, social: 2, innovation: 0.7 }
@@ -190,9 +190,9 @@ const ImpactCalculator = () => {
     };
     
     // Add fund-specific additional metrics
-    if (factor.biodiversity) {
-      impact.biodiversity = (baseMultiplier * factor.biodiversity * timeMultiplier).toFixed(3);
-    }
+    // if (factor.biodiversity) {
+    //   impact.biodiversity = (baseMultiplier * factor.biodiversity * timeMultiplier).toFixed(3);
+    // }
     if (factor.waste) {
       impact.waste = Math.round(baseMultiplier * factor.waste * timeMultiplier);
     }
@@ -237,7 +237,7 @@ const ImpactCalculator = () => {
       water: 0,
       energy: 0,
       social: 0,
-      biodiversity: 0,
+      // biodiversity: 0,
       waste: 0,
       education: 0,
       healthcare: 0,
@@ -261,7 +261,7 @@ const ImpactCalculator = () => {
         totalImpact.social += baseMultiplier * factor.social * avgDuration * compoundGrowth;
         
         // Add category-specific metrics
-        if (factor.biodiversity) totalImpact.biodiversity += baseMultiplier * factor.biodiversity * avgDuration;
+        // if (factor.biodiversity) totalImpact.biodiversity += baseMultiplier * factor.biodiversity * avgDuration;
         if (factor.waste) totalImpact.waste += baseMultiplier * factor.waste * avgDuration;
         if (factor.education) totalImpact.education += baseMultiplier * factor.education * avgDuration;
         if (factor.healthcare) totalImpact.healthcare += baseMultiplier * factor.healthcare * avgDuration;
@@ -277,7 +277,7 @@ const ImpactCalculator = () => {
       water: Math.round(totalImpact.water),
       energy: Math.round(totalImpact.energy),
       social: Math.round(totalImpact.social),
-      biodiversity: totalImpact.biodiversity > 0 ? totalImpact.biodiversity.toFixed(3) : null,
+      // biodiversity: totalImpact.biodiversity > 0 ? totalImpact.biodiversity.toFixed(3) : null,
       waste: totalImpact.waste > 0 ? Math.round(totalImpact.waste) : null,
       education: totalImpact.education > 0 ? totalImpact.education.toFixed(1) : null,
       healthcare: totalImpact.healthcare > 0 ? totalImpact.healthcare.toFixed(1) : null,
@@ -311,39 +311,39 @@ const ImpactCalculator = () => {
 
   const styles = {
     mainContent: {
-      margin: '10px auto',
-      width: '95%',
-      maxWidth: '900px',
-      minHeight: '90vh',
-      padding: '20px 16px',
+      margin: '8px auto',
+      width: '100%',
+      maxWidth: '800px',
+      minHeight: 'auto',
+      padding: '16px 12px',
       backgroundColor: '#0f172a',
       color: '#f8fafc',
-      borderRadius: '12px'
+      borderRadius: '8px'
     },
     title: {
-      fontSize: '1.8rem',
+      fontSize: '1.5rem',
       color: '#22c55e',
-      marginBottom: '24px',
+      marginBottom: '16px',
       textAlign: 'left',
       fontWeight: '600'
     },
     calculatorContainer: {
       backgroundColor: '#1e293b',
-      borderRadius: '12px',
-      padding: '24px',
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+      borderRadius: '8px',
+      padding: '16px',
+      boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)'
     },
     inputSection: {
-      marginBottom: '24px',
+      marginBottom: '16px',
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '16px'
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '12px'
     },
     inputLabel: {
       display: 'block',
       color: '#94a3b8',
-      marginBottom: '6px',
-      fontSize: '0.9rem',
+      marginBottom: '4px',
+      fontSize: '0.85rem',
       fontWeight: '500'
     },
     input: {
@@ -414,143 +414,207 @@ const ImpactCalculator = () => {
   };
 
   return (
-    <div style={styles.mainContent}>
-      <h1 style={styles.title}>Environmental Impact Calculator</h1>
-      
-      <div style={styles.calculatorContainer}>
-        {/* Portfolio vs Manual Toggle */}
-        <div style={{ marginBottom: '24px', textAlign: 'center' }}>
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '16px' }}>
-            <button
-              onClick={() => setShowPortfolioImpact(false)}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: '1px solid #22c55e',
-                backgroundColor: !showPortfolioImpact ? '#22c55e' : 'transparent',
-                color: !showPortfolioImpact ? '#0f172a' : '#22c55e',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                fontWeight: '500'
-              }}
-            >
-              📊 Manual Calculator
-            </button>
-            <button
-              onClick={() => {
-                if (user) {
-                  setShowPortfolioImpact(true);
-                } else {
-                  alert('Please login to view your portfolio impact');
-                }
-              }}
-              disabled={!user}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: '1px solid #22c55e',
-                backgroundColor: showPortfolioImpact ? '#22c55e' : 'transparent',
-                color: showPortfolioImpact ? '#0f172a' : '#22c55e',
-                cursor: user ? 'pointer' : 'not-allowed',
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                opacity: user ? 1 : 0.5
-              }}
-            >
-              💼 My Portfolio Impact
-            </button>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Enhanced Header */}
+      <div className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50 p-6 mb-6">
+        <div className="flex items-center gap-4 mb-3">
+          <div className="p-3 bg-green-500/20 rounded-xl backdrop-blur-sm border border-green-500/30">
+            <FaCalculator className="text-2xl text-green-400" />
           </div>
-          {!user && (
-            <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
-              Login to see the real environmental impact of your current investments
+          <div>
+            <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+              Environmental Impact Calculator
+            </h1>
+            <p className="text-gray-400 text-sm mt-1">
+              Calculate and track your investment's environmental impact in real-time
             </p>
-          )}
+          </div>
+        </div>
+      </div>
+      
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Enhanced Mode Toggle */}
+        <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6 mb-6">
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-semibold text-white mb-3">Choose Calculation Mode</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => setShowPortfolioImpact(false)}
+                className={`group relative px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${
+                  !showPortfolioImpact 
+                    ? 'bg-green-500 text-white shadow-lg shadow-green-500/25' 
+                    : 'bg-slate-700/50 text-gray-300 hover:bg-slate-600/50 border border-slate-600/50'
+                }`}
+              >
+                <div className="p-2 bg-white/10 rounded-lg">
+                  📊
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">Manual Calculator</div>
+                  <div className="text-xs opacity-80">Calculate potential impact</div>
+                </div>
+                {!showPortfolioImpact && (
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400/20 to-emerald-500/20 animate-pulse" />
+                )}
+              </button>
+              
+              <button
+                onClick={() => {
+                  if (user) {
+                    setShowPortfolioImpact(true);
+                  } else {
+                    alert('Please login to view your portfolio impact');
+                  }
+                }}
+                disabled={!user}
+                className={`group relative px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${
+                  showPortfolioImpact 
+                    ? 'bg-green-500 text-white shadow-lg shadow-green-500/25' 
+                    : `${user 
+                        ? 'bg-slate-700/50 text-gray-300 hover:bg-slate-600/50 border border-slate-600/50' 
+                        : 'bg-slate-800/50 text-gray-500 cursor-not-allowed border border-slate-700/30'
+                      }`
+                }`}
+              >
+                <div className="p-2 bg-white/10 rounded-lg">
+                  💼
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold">My Portfolio Impact</div>
+                  <div className="text-xs opacity-80">Real investment impact</div>
+                </div>
+                {showPortfolioImpact && (
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400/20 to-emerald-500/20 animate-pulse" />
+                )}
+              </button>
+            </div>
+            
+            {!user && (
+              <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl">
+                <p className="text-blue-300 text-sm flex items-center gap-2">
+                  <FaInfoCircle className="text-blue-400" />
+                  Login to see the real environmental impact of your current investments
+                </p>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div style={styles.inputSection}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label style={styles.inputLabel}>Investment Amount ($)</label>
+        {!showPortfolioImpact && (
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6 mb-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <div className="p-2 bg-green-500/20 rounded-lg">
+                  <FaChartLine className="text-green-400" />
+                </div>
+                Investment Parameters
+              </h3>
               <button
                 onClick={fetchImpactFactors}
                 disabled={loading}
-                style={{
-                  background: 'none',
-                  border: '1px solid #22c55e',
-                  color: '#22c55e',
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  fontSize: '0.75rem',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  opacity: loading ? 0.5 : 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-300 ${
+                  loading 
+                    ? 'border-gray-600 text-gray-500 cursor-not-allowed' 
+                    : 'border-green-500/50 text-green-400 hover:bg-green-500/10 hover:border-green-500'
+                }`}
               >
-                <FaSync style={{ fontSize: '0.7rem', animation: loading ? 'spin 1s linear infinite' : 'none' }} />
-                Refresh Data
+                <FaSync className={`text-xs ${loading ? 'animate-spin' : ''}`} />
+                <span className="text-xs font-medium">Refresh Data</span>
               </button>
             </div>
-            <input
-              type="number"
-              value={investment}
-              onChange={(e) => setInvestment(e.target.value)}
-              placeholder="Enter amount"
-              style={styles.input}
-            />
-          </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  💰 Investment Amount ($)
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    value={investment}
+                    onChange={(e) => setInvestment(e.target.value)}
+                    placeholder="Enter amount"
+                    className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white 
+                             placeholder-gray-400 focus:border-green-500/50 focus:ring-2 focus:ring-green-500/20 
+                             transition-all duration-300"
+                  />
+                  <div className="absolute right-3 top-3 text-gray-400 text-sm">USD</div>
+                </div>
+              </div>
 
-          <div>
-            <label style={styles.inputLabel}>Investment Duration (Years)</label>
-            <select
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-              style={styles.select}
-            >
-              {[1, 2, 3, 4, 5, 10, 15, 20].map(year => (
-                <option key={year} value={year}>
-                  {year} {year === 1 ? 'year' : 'years'}
-                </option>
-              ))}
-            </select>
-          </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  ⏰ Investment Duration
+                </label>
+                <select
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white 
+                           focus:border-green-500/50 focus:ring-2 focus:ring-green-500/20 transition-all duration-300"
+                >
+                  {[1, 2, 3, 4, 5, 10, 15, 20].map(year => (
+                    <option key={year} value={year} className="bg-slate-800">
+                      {year} {year === 1 ? 'year' : 'years'}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <div>
-            <label style={styles.inputLabel}>Investment Sector</label>
-            <select
-              value={fundType}
-              onChange={(e) => setFundType(e.target.value)}
-              style={styles.select}
-            >
-              <option value="environmental">🌱 Environmental Fund</option>
-              <option value="social">👥 Social Impact Fund</option>
-              <option value="governance">⚖️ Governance Fund</option>
-              <option value="cleantech">🔬 Clean Technology Fund</option>
-            </select>
-          </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  🎯 Investment Sector
+                </label>
+                <select
+                  value={fundType}
+                  onChange={(e) => setFundType(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white 
+                           focus:border-green-500/50 focus:ring-2 focus:ring-green-500/20 transition-all duration-300"
+                >
+                  <option value="environmental" className="bg-slate-800">🌱 Environmental Fund</option>
+                  <option value="social" className="bg-slate-800">👥 Social Impact Fund</option>
+                  <option value="governance" className="bg-slate-800">⚖️ Governance Fund</option>
+                  <option value="cleantech" className="bg-slate-800">🔬 Clean Technology Fund</option>
+                </select>
+              </div>
 
-          <div>
-            <label style={styles.inputLabel}>Impact Region</label>
-            <select
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-              style={styles.select}
-            >
-              <option value="global">🌍 Global Impact</option>
-              <option value="developed">🏙️ Developed Markets</option>
-              <option value="developing">🌾 Developing Markets</option>
-            </select>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  🌍 Impact Region
+                </label>
+                <select
+                  value={region}
+                  onChange={(e) => setRegion(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white 
+                           focus:border-green-500/50 focus:ring-2 focus:ring-green-500/20 transition-all duration-300"
+                >
+                  <option value="global" className="bg-slate-800">🌍 Global Impact</option>
+                  <option value="developed" className="bg-slate-800">🏙️ Developed Markets</option>
+                  <option value="developing" className="bg-slate-800">🌾 Developing Markets</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
 
-        <div style={styles.impactSection}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h2 style={styles.impactTitle}>
-              {showPortfolioImpact ? '💼 Your Portfolio Impact' : '📊 Impact Projection'}
+        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 
+                       shadow-xl hover:shadow-2xl transition-all duration-300">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text 
+                          text-transparent flex items-center gap-3">
+              {showPortfolioImpact ? (
+                <>
+                  <div className="p-2 bg-green-500/20 rounded-lg">💼</div>
+                  Your Portfolio Impact
+                </>
+              ) : (
+                <>
+                  <div className="p-2 bg-blue-500/20 rounded-lg">📊</div>
+                  Impact Projection
+                </>
+              )}
             </h2>
             {lastUpdated && (
-              <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
+              <div className="text-xs text-gray-400 bg-slate-700/50 px-3 py-1 rounded-full">
                 Updated: {lastUpdated.toLocaleTimeString()}
               </div>
             )}
@@ -590,45 +654,63 @@ const ImpactCalculator = () => {
                 </div>
                 
                 {/* Portfolio Impact Cards */}
-                <div style={styles.impactGrid}>
-                  <div style={styles.impactCard}>
-                    <FaLeaf style={{ fontSize: '1.5rem', color: '#22c55e', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>CO₂ Reduction</div>
-                    <div style={styles.impactValue}>{calculatePortfolioImpact()?.co2} tons</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaLeaf className="text-2xl text-green-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">CO₂ Reduction</div>
+                    <div className="text-2xl font-bold text-green-400">
+                      {calculatePortfolioImpact()?.co2} tons
+                    </div>
                   </div>
                   
-                  <div style={styles.impactCard}>
-                    <FaWater style={{ fontSize: '1.5rem', color: '#3b82f6', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Water Saved</div>
-                    <div style={styles.impactValue}>{calculatePortfolioImpact()?.water?.toLocaleString()} L</div>
+                  <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaWater className="text-2xl text-blue-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Water Saved</div>
+                    <div className="text-2xl font-bold text-blue-400">
+                      {calculatePortfolioImpact()?.water?.toLocaleString()} L
+                    </div>
                   </div>
 
-                  <div style={styles.impactCard}>
-                    <FaSolarPanel style={{ fontSize: '1.5rem', color: '#f59e0b', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Clean Energy</div>
-                    <div style={styles.impactValue}>{calculatePortfolioImpact()?.energy?.toLocaleString()} kWh</div>
+                  <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaSolarPanel className="text-2xl text-yellow-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Clean Energy</div>
+                    <div className="text-2xl font-bold text-yellow-400">
+                      {calculatePortfolioImpact()?.energy?.toLocaleString()} kWh
+                    </div>
                   </div>
 
-                  <div style={styles.impactCard}>
-                    <FaUsers style={{ fontSize: '1.5rem', color: '#8b5cf6', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Lives Impacted</div>
-                    <div style={styles.impactValue}>{calculatePortfolioImpact()?.social} people</div>
+                  <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaUsers className="text-2xl text-purple-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Lives Impacted</div>
+                    <div className="text-2xl font-bold text-purple-400">
+                      {calculatePortfolioImpact()?.social} people
+                    </div>
                   </div>
                   
                   {/* Portfolio-specific additional metrics */}
-                  {calculatePortfolioImpact()?.biodiversity && (
-                    <div style={styles.impactCard}>
-                      <FaSeedling style={{ fontSize: '1.5rem', color: '#10b981', marginBottom: '8px' }} />
-                      <div style={styles.impactLabel}>Biodiversity Index</div>
-                      <div style={styles.impactValue}>{calculatePortfolioImpact()?.biodiversity} units</div>
+                  {/* {calculatePortfolioImpact()?.biodiversity && (
+                    <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 
+                                   rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                      <FaSeedling className="text-2xl text-emerald-400 mb-3" />
+                      <div className="text-sm text-gray-400 mb-1">Biodiversity Index</div>
+                      <div className="text-2xl font-bold text-emerald-400">
+                        {calculatePortfolioImpact()?.biodiversity} units
+                      </div>
                     </div>
-                  )}
+                  )} */}
                   
                   {calculatePortfolioImpact()?.innovation && (
-                    <div style={styles.impactCard}>
-                      <FaGlobe style={{ fontSize: '1.5rem', color: '#06b6d4', marginBottom: '8px' }} />
-                      <div style={styles.impactLabel}>Innovation Index</div>
-                      <div style={styles.impactValue}>{calculatePortfolioImpact()?.innovation} points</div>
+                    <div className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 
+                                   rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                      <FaGlobe className="text-2xl text-cyan-400 mb-3" />
+                      <div className="text-sm text-gray-400 mb-1">Innovation Index</div>
+                      <div className="text-2xl font-bold text-cyan-400">
+                        {calculatePortfolioImpact()?.innovation} points
+                      </div>
                     </div>
                   )}
                 </div>
@@ -679,74 +761,102 @@ const ImpactCalculator = () => {
               </div>
             ) : calculateImpact() ? (
             <>
-              <div style={styles.impactGrid}>
-                <div style={styles.impactCard}>
-                  <FaLeaf style={{ fontSize: '1.5rem', color: '#22c55e', marginBottom: '8px' }} />
-                  <div style={styles.impactLabel}>CO₂ Reduction</div>
-                  <div style={styles.impactValue}>{calculateImpact()?.co2} tons</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+                <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 
+                               rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                  <FaLeaf className="text-2xl text-green-400 mb-3" />
+                  <div className="text-sm text-gray-400 mb-1">CO₂ Reduction</div>
+                  <div className="text-2xl font-bold text-green-400">
+                    {calculateImpact()?.co2} tons
+                  </div>
                 </div>
                 
-                <div style={styles.impactCard}>
-                  <FaWater style={{ fontSize: '1.5rem', color: '#3b82f6', marginBottom: '8px' }} />
-                  <div style={styles.impactLabel}>Water Saved</div>
-                  <div style={styles.impactValue}>{calculateImpact()?.water?.toLocaleString()} L</div>
+                <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 
+                               rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                  <FaWater className="text-2xl text-blue-400 mb-3" />
+                  <div className="text-sm text-gray-400 mb-1">Water Saved</div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {calculateImpact()?.water?.toLocaleString()} L
+                  </div>
                 </div>
 
-                <div style={styles.impactCard}>
-                  <FaSolarPanel style={{ fontSize: '1.5rem', color: '#f59e0b', marginBottom: '8px' }} />
-                  <div style={styles.impactLabel}>Clean Energy</div>
-                  <div style={styles.impactValue}>{calculateImpact()?.energy?.toLocaleString()} kWh</div>
+                <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30 
+                               rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                  <FaSolarPanel className="text-2xl text-yellow-400 mb-3" />
+                  <div className="text-sm text-gray-400 mb-1">Clean Energy</div>
+                  <div className="text-2xl font-bold text-yellow-400">
+                    {calculateImpact()?.energy?.toLocaleString()} kWh
+                  </div>
                 </div>
 
-                <div style={styles.impactCard}>
-                  <FaUsers style={{ fontSize: '1.5rem', color: '#8b5cf6', marginBottom: '8px' }} />
-                  <div style={styles.impactLabel}>Lives Impacted</div>
-                  <div style={styles.impactValue}>{calculateImpact()?.social} people</div>
+                <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 
+                               rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                  <FaUsers className="text-2xl text-purple-400 mb-3" />
+                  <div className="text-sm text-gray-400 mb-1">Lives Impacted</div>
+                  <div className="text-2xl font-bold text-purple-400">
+                    {calculateImpact()?.social} people
+                  </div>
                 </div>
                 
                 {/* Additional metrics based on fund type */}
-                {calculateImpact()?.biodiversity && (
-                  <div style={styles.impactCard}>
-                    <FaSeedling style={{ fontSize: '1.5rem', color: '#10b981', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Biodiversity Index</div>
-                    <div style={styles.impactValue}>{calculateImpact()?.biodiversity} units</div>
+                {/* {calculateImpact()?.biodiversity && (
+                  <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaSeedling className="text-2xl text-emerald-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Biodiversity Index</div>
+                    <div className="text-2xl font-bold text-emerald-400">
+                      {calculateImpact()?.biodiversity} units
+                    </div>
                   </div>
                 )}
-                
+                 */}
                 {calculateImpact()?.waste && (
-                  <div style={styles.impactCard}>
-                    <FaIndustry style={{ fontSize: '1.5rem', color: '#6b7280', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Waste Reduced</div>
-                    <div style={styles.impactValue}>{calculateImpact()?.waste} kg</div>
+                  <div className="bg-gradient-to-br from-gray-500/20 to-gray-600/20 border border-gray-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaIndustry className="text-2xl text-gray-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Waste Reduced</div>
+                    <div className="text-2xl font-bold text-gray-300">
+                      {calculateImpact()?.waste} kg
+                    </div>
                   </div>
                 )}
                 
                 {calculateImpact()?.education && (
-                  <div style={styles.impactCard}>
-                    <FaChartLine style={{ fontSize: '1.5rem', color: '#f97316', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Education Access</div>
-                    <div style={styles.impactValue}>{calculateImpact()?.education} programs</div>
+                  <div className="bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaChartLine className="text-2xl text-orange-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Education Access</div>
+                    <div className="text-2xl font-bold text-orange-400">
+                      {calculateImpact()?.education} programs
+                    </div>
                   </div>
                 )}
                 
                 {calculateImpact()?.innovation && (
-                  <div style={styles.impactCard}>
-                    <FaGlobe style={{ fontSize: '1.5rem', color: '#06b6d4', marginBottom: '8px' }} />
-                    <div style={styles.impactLabel}>Innovation Index</div>
-                    <div style={styles.impactValue}>{calculateImpact()?.innovation} points</div>
+                  <div className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 
+                                 rounded-xl p-6 hover:scale-105 transition-all duration-300">
+                    <FaGlobe className="text-2xl text-cyan-400 mb-3" />
+                    <div className="text-sm text-gray-400 mb-1">Innovation Index</div>
+                    <div className="text-2xl font-bold text-cyan-400">
+                      {calculateImpact()?.innovation} points
+                    </div>
                   </div>
                 )}
               </div>
               
-              <div style={{ marginTop: '24px', padding: '16px', backgroundColor: '#1e1b4b', borderRadius: '8px', borderLeft: '4px solid #22c55e' }}>
-                <h3 style={{ color: '#22c55e', fontSize: '1rem', marginBottom: '8px' }}>🎯 Projected Impact</h3>
-                <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5' }}>
+              <div className="mt-8 p-6 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/30 
+                            rounded-xl backdrop-blur-sm">
+                <h3 className="text-lg font-semibold text-green-400 mb-3 flex items-center">
+                  <span className="mr-2">🎯</span>
+                  Projected Impact
+                </h3>
+                <p className="text-gray-300 leading-relaxed mb-4">
                   Your ${parseFloat(investment || 0).toLocaleString()} investment in {fundType} funds over {duration} year{duration !== '1' ? 's' : ''} could generate
                   significant positive impact in the {region === 'global' ? 'global' : region} market. These projections are based on
                   real-time environmental data and current market conditions.
                 </p>
                 {user && (
-                  <p style={{ color: '#22c55e', fontSize: '0.85rem', marginTop: '8px' }}>
+                  <p className="text-green-300 text-sm bg-green-500/10 p-3 rounded-lg border border-green-500/20">
                     💡 Switch to 'My Portfolio Impact' to see the actual impact of your current investments!
                   </p>
                 )}
@@ -765,13 +875,16 @@ const ImpactCalculator = () => {
         )}
         </div>
 
-        <div style={styles.note}>
-          📊 <strong>Real-Time Data Sources:</strong> Impact calculations use live environmental data with seasonal variations,
-          regional multipliers, and market condition factors. Projections include compound growth factors (5% annually) and 
-          are updated every 2 minutes. Last updated: {lastUpdated ? lastUpdated.toLocaleString() : 'Loading...'}
-          <br /><br />
-          ⚠️ <strong>Disclaimer:</strong> Actual impact may vary based on fund performance, market conditions, and implementation
-          strategies. These are evidence-based projections using industry research data, not guaranteed outcomes.
+        <div className="mt-8 p-6 bg-slate-700/30 border border-slate-600/30 rounded-xl backdrop-blur-sm">
+          <p className="text-gray-300 text-sm leading-relaxed">
+            <span className="text-blue-400 font-semibold">📊 Real-Time Data Sources:</span> Impact calculations use live environmental data with seasonal variations,
+            regional multipliers, and market condition factors. Projections include compound growth factors (5% annually) and 
+            are updated every 2 minutes. Last updated: {lastUpdated ? lastUpdated.toLocaleString() : 'Loading...'}
+          </p>
+          <p className="text-gray-300 text-sm leading-relaxed mt-3">
+            <span className="text-yellow-400 font-semibold">⚠️ Disclaimer:</span> Actual impact may vary based on fund performance, market conditions, and implementation
+            strategies. These are evidence-based projections using industry research data, not guaranteed outcomes.
+          </p>
         </div>
       </div>
     </div>

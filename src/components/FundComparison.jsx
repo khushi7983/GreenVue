@@ -30,24 +30,24 @@ const FundSelector = React.memo(({
   fundNumber,
   navPrices 
 }) => (
-  <div className="bg-slate-800/30 backdrop-blur-sm p-6 rounded-2xl border border-slate-600/30">
-    <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-      <FaSearch />
+  <div className="bg-slate-800/30 backdrop-blur-sm p-4 rounded-xl border border-slate-600/30">
+    <h3 className="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
+      <FaSearch className="text-sm" />
       {title}
     </h3>
     
     {/* Search Input */}
-    <div className="relative mb-4">
+    <div className="relative mb-3">
       <input
         type="text"
-        placeholder="Search for funds..."
+        placeholder="Search funds..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full p-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white 
+        className="w-full p-2.5 text-sm bg-slate-700/50 border border-slate-600/50 rounded-lg text-white 
                  placeholder-gray-400 focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25"
         autoComplete="off"
       />
-      <FaSearch className="absolute right-3 top-3.5 text-gray-400" />
+      <FaSearch className="absolute right-2.5 top-3 text-gray-400 text-sm" />
     </div>
 
     {/* Fund Selection */}
@@ -72,17 +72,17 @@ const FundSelector = React.memo(({
     {/* Selected Fund Display */}
     {selectedFund && (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-4 rounded-xl border border-green-500/30"
+        className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-3 rounded-lg border border-green-500/30"
       >
-        <div className="font-bold text-white mb-2">{selectedFund.schemeName}</div>
-        <div className="grid grid-cols-2 gap-2 text-sm">
+        <div className="font-semibold text-white mb-2 text-sm leading-tight">{selectedFund.schemeName}</div>
+        <div className="grid grid-cols-2 gap-2 text-xs">
           <div className="text-gray-300">
             <span className="text-gray-400">NAV:</span> ₹{navPrices[selectedFund.schemeCode]?.toFixed(2) || 'Loading...'}
           </div>
           <div className="text-gray-300">
-            <span className="text-gray-400">ESG Score:</span> {selectedFund.esgScore}/100
+            <span className="text-gray-400">ESG:</span> {selectedFund.esgScore}/100
           </div>
           <div className="text-gray-300">
             <span className="text-gray-400">Category:</span> {selectedFund.category}
