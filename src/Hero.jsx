@@ -26,9 +26,9 @@ const Hero = ({ onStartInvesting }) => {
 
         <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto 
                       font-light leading-relaxed animate-fade-in-up-slow">
-          Transform your portfolio with 
-          <span className="text-green-400 font-semibold"> ESG funds </span> 
-          and build a sustainable financial future that benefits both you and the planet.
+          Experience next-generation investing with 
+          <span className="text-green-400 font-semibold"> AI-powered recommendations</span>, 
+          real-time analytics, and personalized ESG portfolio management that aligns your values with your wealth.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -63,8 +63,8 @@ const Hero = ({ onStartInvesting }) => {
               <div className="flex items-center justify-center mb-2">
                 <TrendingUp className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
               </div>
-              <div className="text-2xl font-bold text-white mb-1">$2.3T+</div>
-              <div className="text-gray-400 text-xs">Global ESG Assets</div>
+              <div className="text-2xl font-bold text-white mb-1">AI-Powered</div>
+              <div className="text-gray-400 text-xs">Investment Assistant</div>
             </div>
           </div>
           
@@ -74,8 +74,8 @@ const Hero = ({ onStartInvesting }) => {
               <div className="flex items-center justify-center mb-2">
                 <Shield className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
               </div>
-              <div className="text-2xl font-bold text-white mb-1">85%</div>
-              <div className="text-gray-400 text-xs">Risk Reduction</div>
+              <div className="text-2xl font-bold text-white mb-1">Real-Time</div>
+              <div className="text-gray-400 text-xs">NAV & Analytics</div>
             </div>
           </div>
           
@@ -85,8 +85,8 @@ const Hero = ({ onStartInvesting }) => {
               <div className="flex items-center justify-center mb-2">
                 <Globe className="w-6 h-6 text-green-400 group-hover:scale-110 transition-transform" />
               </div>
-              <div className="text-2xl font-bold text-white mb-1">50K+</div>
-              <div className="text-gray-400 text-xs">Happy Investors</div>
+              <div className="text-2xl font-bold text-white mb-1">500+</div>
+              <div className="text-gray-400 text-xs">ESG Funds</div>
             </div>
           </div>
         </div>

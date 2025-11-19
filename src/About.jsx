@@ -55,8 +55,8 @@ const AboutUs = () => {
                 className="text-lg text-gray-300 mb-6 leading-relaxed"
               >
                 At <span className="text-green-400 font-semibold bg-green-400/10 px-2 py-1 rounded-lg">GreenVue</span>, 
-                we believe that investing should not only generate financial returns but also contribute to a sustainable future. 
-                Our platform empowers individuals to invest at least 1% of their income in green mutual funds and ESG investments.
+                we've revolutionized sustainable investing with cutting-edge AI technology and real-time analytics. 
+                Our advanced platform combines intelligent recommendations with comprehensive ESG fund analysis to maximize both your returns and environmental impact.
               </motion.p>
 
               <motion.p 
@@ -66,9 +66,9 @@ const AboutUs = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="text-lg text-gray-300 mb-6 leading-relaxed"
               >
-                Green investing allows you to grow your wealth while promoting clean energy, ethical labor practices, 
-                and responsible governance. Unlike traditional investments, ESG funds focus on companies that are making 
-                a positive environmental and social impact.
+                Powered by Google's Gemini AI and live market data integration, GreenVue offers personalized investment strategies, 
+                real-time portfolio impact tracking, and sophisticated fund comparison tools. Experience the future of ESG investing 
+                where technology meets sustainability.
               </motion.p>
 
               <motion.div
@@ -85,9 +85,9 @@ const AboutUs = () => {
                     <Globe className="w-5 h-5 text-green-400" />
                   </div>
                   <p className="text-lg text-green-300 font-semibold leading-relaxed">
-                    We aim to create a movement where every small contribution leads to a big impact. 
-                    By investing in ESG funds, you are not just securing your financial future but also 
-                    contributing to a healthier planet. Join GreenVue today and be a part of the change!
+                    Beyond traditional investment platforms, GreenVue delivers institutional-grade analytics with consumer-friendly interfaces. 
+                    Our AI assistant provides 24/7 investment guidance, while real-time NAV integration ensures you always have the most current market data. 
+                    Transform your investment journey with intelligent, sustainable, and profitable decisions.
                   </p>
                 </div>
                   </motion.div>

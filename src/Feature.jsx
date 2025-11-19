@@ -84,34 +84,34 @@ const FeatureCard = ({ title, description, icon: Icon, delay = 0, offset = 0 }) 
 const FeaturesSection = () => {
   const features = [
     {
+      icon: Sparkles,
+      title: "AI-Powered Investment Assistant",
+      description: "Get personalized ESG fund recommendations with our intelligent chatbot. Receive tailored advice based on your risk profile, investment goals, and sustainability preferences."
+    },
+    {
       icon: TrendingUp,
-      title: "Growing Popularity of ESG Investing",
-      description: "Learn how ESG investing has become mainstream, with increasing numbers of investors prioritizing environmental, social, and governance factors in their investment decisions."
+      title: "Real-Time Fund Analytics",
+      description: "Access live NAV prices, performance metrics, and comprehensive fund analysis. Make informed decisions with up-to-date market data and dynamic investment insights."
     },
     {
       icon: Scale,
-      title: "ESG vs. Traditional Investing",
-      description: "Understand the key differences between ESG and traditional investing approaches, and how sustainable investing can potentially offer better risk-adjusted returns."
-    },
-    {
-      icon: Leaf,
-      title: "Reducing Environmental Risks",
-      description: "Discover how ESG-focused investments help minimize exposure to environmental risks and support companies leading the transition to a sustainable economy."
-    },
-    {
-      icon: Heart,
-      title: "Consumer and Employee Well-being",
-      description: "Explore investments in companies that prioritize stakeholder well-being, fostering better workplace conditions and consumer satisfaction."
-    },
-    {
-      icon: PiggyBank,
-      title: "Sustainable & Profitable Investing",
-      description: "See how sustainable investing can generate competitive returns while contributing to positive environmental and social impact."
+      title: "Advanced Fund Comparison",
+      description: "Compare ESG funds side-by-side with detailed analytics including expense ratios, returns, risk metrics, and sustainability scores to find the perfect match."
     },
     {
       icon: Target,
-      title: "Aligning Investments with Values",
-      description: "Match your investment strategy with your personal values while building a diversified portfolio that supports sustainable business practices."
+      title: "Portfolio Impact Calculator",
+      description: "Track your environmental impact in real-time. See how your investments contribute to carbon reduction, water conservation, and other sustainability metrics."
+    },
+    {
+      icon: Heart,
+      title: "Goal-Based Investment Planning",
+      description: "Set and track your financial goals with AI-powered recommendations. Create customized portfolios aligned with your values and investment timeline."
+    },
+    {
+      icon: Leaf,
+      title: "ESG Education & Insights",
+      description: "Stay informed with curated ESG news, market trends, and educational content. Build your knowledge while growing your sustainable investment portfolio."
     }
   ];
 
@@ -144,7 +144,7 @@ const FeaturesSection = () => {
                        bg-clip-text text-transparent
                        drop-shadow-2xl leading-tight"
           >
-            Why Choose ESG Investing?
+            Advanced Features & Capabilities
           </motion.h2>
         </motion.div>
         
