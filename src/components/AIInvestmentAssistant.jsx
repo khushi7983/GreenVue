@@ -35,7 +35,7 @@ const ChatInterface = React.memo(({
 }) => (
   <div className="flex flex-col h-full">
     {/* Chat Messages */}
-    <div className="flex-1 overflow-y-auto space-y-4 p-4 max-h-96">
+    <div className="flex-1 overflow-y-auto space-y-3 sm:space-y-4 p-3 sm:p-4 max-h-80 sm:max-h-96">
       {messages.map((message) => (
         <motion.div
           key={message.id}
@@ -43,7 +43,7 @@ const ChatInterface = React.memo(({
           animate={{ opacity: 1, y: 0 }}
           className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
         >
-          <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+          <div className={`max-w-[85%] sm:max-w-xs lg:max-w-md px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg ${
             message.type === 'user' 
               ? 'bg-green-500 text-white' 
               : 'bg-slate-700 text-gray-100'
@@ -72,7 +72,7 @@ const ChatInterface = React.memo(({
     </div>
 
     {/* Chat Input */}
-    <div className="border-t border-slate-600/30 p-4">
+    <div className="border-t border-slate-600/30 p-3 sm:p-4">
       <div className="flex gap-2">
         <input
           ref={chatInputRef}
@@ -80,41 +80,43 @@ const ChatInterface = React.memo(({
           value={inputMessage}
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
-          placeholder="Ask me about investments, risk assessment, or portfolio planning..."
-          className="flex-1 p-3 bg-slate-700/50 border border-slate-600/50 rounded-xl 
-                   text-white placeholder-gray-400 focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 focus:outline-none"
+          placeholder="Ask me about investments..."
+          className="flex-1 p-2.5 sm:p-3 bg-slate-700/50 border border-slate-600/50 rounded-xl 
+                   text-white placeholder-gray-400 focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 focus:outline-none
+                   text-sm sm:text-base touch-manipulation"
           autoComplete="off"
         />
         <button
           onClick={handleSendMessage}
           disabled={!inputMessage.trim()}
-          className="px-4 py-3 bg-green-500 hover:bg-green-600 disabled:bg-slate-600 
-                   disabled:cursor-not-allowed text-white rounded-xl transition-colors"
+          className="px-3 sm:px-4 py-2.5 sm:py-3 bg-green-500 hover:bg-green-600 disabled:bg-slate-600 
+                   disabled:cursor-not-allowed text-white rounded-xl transition-colors
+                   touch-manipulation shrink-0"
         >
-          <FaPaperPlane />
+          <FaPaperPlane className="text-sm" />
         </button>
       </div>
       
       {/* Quick Action Buttons */}
-      <div className="flex gap-2 mt-3 flex-wrap">
+      <div className="flex gap-1.5 sm:gap-2 mt-2 sm:mt-3 overflow-x-auto pb-1">
         <button
           onClick={handleRiskAssessment}
-          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
-                   rounded-md transition-colors"
+          className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-slate-700 hover:bg-slate-600 active:bg-slate-500 text-xs text-gray-300 
+                   rounded-md transition-colors touch-manipulation whitespace-nowrap shrink-0"
         >
           Risk Assessment
         </button>
         <button
           onClick={handleFundRecommendations}
-          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
-                   rounded-md transition-colors"
+          className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-slate-700 hover:bg-slate-600 active:bg-slate-500 text-xs text-gray-300 
+                   rounded-md transition-colors touch-manipulation whitespace-nowrap shrink-0"
         >
           Fund Recommendations
         </button>
         <button
           onClick={handleGoalPlanning}
-          className="px-2.5 py-1 bg-slate-700 hover:bg-slate-600 text-xs text-gray-300 
-                   rounded-md transition-colors"
+          className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-slate-700 hover:bg-slate-600 active:bg-slate-500 text-xs text-gray-300 
+                   rounded-md transition-colors touch-manipulation whitespace-nowrap shrink-0"
         >
           Goal Planning
         </button>
@@ -585,22 +587,24 @@ const AIInvestmentAssistant = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
-      <div className="bg-slate-800/30 border-b border-slate-600/30 p-4">
+      <div className="bg-slate-800/30 border-b border-slate-600/30 p-3 sm:p-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-3">
-              <FaRobot className="text-2xl text-green-400" />
-              <h1 className="text-2xl lg:text-3xl font-bold text-white">AI Investment Assistant</h1>
+          <div className="flex items-center justify-between mb-2 sm:mb-3 gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <FaRobot className="text-lg sm:text-xl lg:text-2xl text-green-400 shrink-0" />
+              <h1 className="text-lg sm:text-xl lg:text-3xl font-bold text-white leading-tight truncate">
+                AI Investment Assistant
+              </h1>
             </div>
             
             {/* AI Status Indicator */}
-            <div className={`flex items-center gap-2 px-2 py-1 rounded-full text-xs ${
+            <div className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-full text-xs shrink-0 ${
               isAIConfigured 
                 ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
                 : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
             }`}>
               <div className={`w-1.5 h-1.5 rounded-full ${isAIConfigured ? 'bg-green-400' : 'bg-yellow-400'}`} />
-              {isAIConfigured ? 'AI Powered' : 'Demo Mode'}
+              <span className="hidden sm:inline">{isAIConfigured ? 'AI Powered' : 'Demo Mode'}</span>
             </div>
           </div>
           <p className="text-gray-400 text-sm">
@@ -620,24 +624,28 @@ const AIInvestmentAssistant = () => {
 
       {/* Tab Navigation */}
       <div className="bg-slate-800/20 border-b border-slate-600/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex space-x-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6">
+          <div className="flex space-x-4 sm:space-x-8 overflow-x-auto">
             {[
-              { id: 'chat', label: 'AI Chat', icon: FaRobot },
-              { id: 'recommendations', label: 'Recommendations', icon: FaStar },
-              { id: 'goals', label: 'Goal Planning', icon: FaBullseye }
+              { id: 'chat', label: 'AI Chat', shortLabel: 'Chat', icon: FaRobot },
+              { id: 'recommendations', label: 'Recommendations', shortLabel: 'Recs', icon: FaStar },
+              { id: 'goals', label: 'Goal Planning', shortLabel: 'Goals', icon: FaBullseye }
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 py-4 px-6 border-b-2 transition-colors ${
+                className={`flex items-center gap-1.5 sm:gap-2 py-3 sm:py-4 px-3 sm:px-6 border-b-2 transition-colors
+                  touch-manipulation whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'border-green-500 text-green-400'
-                    : 'border-transparent text-gray-400 hover:text-white'
+                    : 'border-transparent text-gray-400 hover:text-white active:text-gray-200'
                 }`}
               >
-                <tab.icon />
-                {tab.label}
+                <tab.icon className="text-sm sm:text-base" />
+                <span className="text-xs sm:text-sm md:text-base">
+                  <span className="sm:hidden">{tab.shortLabel}</span>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </span>
               </button>
             ))}
           </div>
@@ -645,7 +653,7 @@ const AIInvestmentAssistant = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-3 sm:p-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

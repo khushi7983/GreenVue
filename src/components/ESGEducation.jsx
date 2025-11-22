@@ -31,48 +31,52 @@ const ESGEducation = () => {
       </div>
 
       <div className="relative bg-transparent text-white">
-        <div className="max-w-5xl mx-auto px-4 py-6">
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
           {/* Main Content */}
-          <div className="space-y-10">
+          <div className="space-y-6 sm:space-y-8 lg:space-y-10">
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="text-center mb-8">
-                <h1 className="text-2xl lg:text-3xl font-bold mb-3 bg-gradient-to-r from-green-400 to-emerald-500 
-                               bg-clip-text text-transparent">ESG Investment Guide</h1>
-                <p className="text-gray-300 text-base max-w-2xl mx-auto">
+              <div className="text-center mb-6 sm:mb-8">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-green-400 to-emerald-500 
+                               bg-clip-text text-transparent leading-tight">
+                  ESG Investment Guide
+                </h1>
+                <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto px-2">
                   Learn about Environmental, Social, and Governance investing principles and strategies.
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                   whileHover={{ y: -4 }}
-                  className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700/50 
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-slate-800/50 backdrop-blur-sm p-4 sm:p-5 lg:p-6 rounded-xl border border-slate-700/50 
                            hover:border-green-500/50 transition-all duration-300 group cursor-pointer
-                           hover:shadow-lg hover:shadow-green-500/10 relative overflow-hidden"
+                           hover:shadow-lg hover:shadow-green-500/10 relative overflow-hidden
+                           touch-manipulation"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent 
                                 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 bg-green-500/20 rounded-lg group-hover:bg-green-500/30 transition-colors duration-300">
-                        <Globe className="w-5 h-5 text-green-400" />
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                      <div className="p-2 sm:p-2.5 bg-green-500/20 rounded-lg group-hover:bg-green-500/30 transition-colors duration-300 shrink-0">
+                        <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                       </div>
-                      <h3 className="text-lg font-bold text-green-400 group-hover:text-green-300 transition-colors duration-300">
+                      <h3 className="text-base sm:text-lg font-bold text-green-400 group-hover:text-green-300 transition-colors duration-300 leading-tight">
                         Environmental
                       </h3>
                     </div>
-                    <p className="text-gray-400 mb-3 text-sm group-hover:text-gray-300 transition-colors duration-300">
+                    <p className="text-gray-400 mb-2 sm:mb-3 text-xs sm:text-sm group-hover:text-gray-300 transition-colors duration-300">
                       Companies fighting climate change
                     </p>
-                    <ul className="text-gray-300 space-y-3">
+                    <ul className="text-gray-300 space-y-2 sm:space-y-3 text-sm">
                       <li className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                         Climate action & clean energy

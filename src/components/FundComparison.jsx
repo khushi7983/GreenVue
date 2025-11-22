@@ -30,10 +30,10 @@ const FundSelector = React.memo(({
   fundNumber,
   navPrices 
 }) => (
-  <div className="bg-slate-800/30 backdrop-blur-sm p-4 rounded-xl border border-slate-600/30">
-    <h3 className="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
-      <FaSearch className="text-sm" />
-      {title}
+  <div className="bg-slate-800/30 backdrop-blur-sm p-3 sm:p-4 rounded-xl border border-slate-600/30">
+    <h3 className="text-base sm:text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
+      <FaSearch className="text-xs sm:text-sm shrink-0" />
+      <span className="truncate">{title}</span>
     </h3>
     
     {/* Search Input */}
@@ -43,26 +43,32 @@ const FundSelector = React.memo(({
         placeholder="Search funds..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full p-2.5 text-sm bg-slate-700/50 border border-slate-600/50 rounded-lg text-white 
-                 placeholder-gray-400 focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25"
+        className="w-full p-2 sm:p-2.5 text-xs sm:text-sm bg-slate-700/50 border border-slate-600/50 rounded-lg text-white 
+                 placeholder-gray-400 focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25
+                 touch-manipulation"
         autoComplete="off"
       />
-      <FaSearch className="absolute right-2.5 top-3 text-gray-400 text-sm" />
+      <FaSearch className="absolute right-2 sm:right-2.5 top-2.5 sm:top-3 text-gray-400 text-xs sm:text-sm" />
     </div>
 
     {/* Fund Selection */}
     {searchTerm && (
-      <div className="mb-4 max-h-60 overflow-y-auto space-y-2">
+      <div className="mb-4 max-h-48 sm:max-h-60 overflow-y-auto space-y-1.5 sm:space-y-2">
         {filteredFunds.map(fund => (
           <div
             key={fund.schemeCode}
             onClick={() => onSelectFund(fund)}
-            className="p-3 bg-slate-700/30 hover:bg-slate-600/40 rounded-lg cursor-pointer 
-                     border border-transparent hover:border-green-500/30 transition-all"
+            className="p-2.5 sm:p-3 bg-slate-700/30 hover:bg-slate-600/40 active:bg-slate-600/50 rounded-lg cursor-pointer 
+                     border border-transparent hover:border-green-500/30 transition-all duration-200
+                     touch-manipulation"
           >
-            <div className="font-medium text-white text-sm">{fund.schemeName}</div>
-            <div className="text-xs text-gray-400 mt-1">
-              ESG Score: {fund.esgScore} | AUM: ₹{fund.aum} Cr
+            <div className="font-medium text-white text-xs sm:text-sm leading-tight line-clamp-2">
+              {fund.schemeName}
+            </div>
+            <div className="text-xs text-gray-400 mt-1 flex flex-col sm:flex-row sm:gap-2">
+              <span>ESG: {fund.esgScore}</span>
+              <span className="hidden sm:inline">|</span>
+              <span>AUM: ₹{fund.aum} Cr</span>
             </div>
           </div>
         ))}

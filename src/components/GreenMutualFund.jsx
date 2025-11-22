@@ -84,37 +84,38 @@ const GreenMutualFund = () => {
         <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-500/3 rounded-full filter blur-2xl" />
       </div>
       
-      <div className="relative bg-transparent text-white p-6">
+      <div className="relative bg-transparent text-white p-3 sm:p-4 lg:p-6">
         <div className="max-w-7xl mx-auto">
         {/* Header with Additional Filters */}
-        <div className="flex flex-col gap-6 mb-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-green-500/20 rounded-2xl backdrop-blur-sm border border-green-500/30">
-                <FaLeaf className="text-2xl text-green-400" />
+        <div className="flex flex-col gap-4 sm:gap-6 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="p-2 sm:p-3 bg-green-500/20 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-green-500/30 shrink-0">
+                <FaLeaf className="text-xl sm:text-2xl text-green-400" />
               </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
-                             bg-clip-text text-transparent">
+              <div className="min-w-0">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+                             bg-clip-text text-transparent leading-tight">
                   Green Mutual Funds
                 </h2>
-                <p className="text-gray-300 mt-1">Sustainable investment opportunities</p>
+                <p className="text-gray-300 mt-0.5 sm:mt-1 text-sm sm:text-base">Sustainable investment opportunities</p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <div className="flex flex-col gap-2 sm:gap-3 w-full sm:w-auto">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Search funds..."
-                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-white px-4 py-3 pl-10 
-                           rounded-xl focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 transition-all duration-300"
+                  className="w-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-white px-3 sm:px-4 py-2.5 sm:py-3 pl-9 sm:pl-10 
+                           rounded-xl focus:border-green-500/50 focus:ring-1 focus:ring-green-500/25 transition-all duration-300
+                           text-sm sm:text-base touch-manipulation"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <FaInfoCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FaInfoCircle className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
               </div>
-              <select className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-white px-4 py-3 
-                               rounded-xl focus:border-green-500/50 transition-all duration-300">
+              <select className="w-full sm:w-auto bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 text-white px-3 sm:px-4 py-2.5 sm:py-3 
+                               rounded-xl focus:border-green-500/50 transition-all duration-300 text-sm sm:text-base">
                 <option>Sort by ESG Score</option>
                 <option>Sort by Returns</option>
                 <option>Sort by Risk Level</option>
@@ -123,20 +124,21 @@ const GreenMutualFund = () => {
           </div>
 
           {/* ESG Score Categories */}
-          <div className="bg-slate-800/30 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/50">
-            <h3 className="text-lg font-semibold text-green-400 mb-3 flex items-center gap-2">
-              <FaChartLine className="text-sm" />
-              ESG Score Categories
+          <div className="bg-slate-800/30 backdrop-blur-sm p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-700/50">
+            <h3 className="text-base sm:text-lg font-semibold text-green-400 mb-2 sm:mb-3 flex items-center gap-2">
+              <FaChartLine className="text-xs sm:text-sm shrink-0" />
+              <span>ESG Score Categories</span>
             </h3>
-            <div className="flex gap-2 overflow-x-auto pb-2">
+            <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin">
               {esgCategories.map(category => (
                 <button 
                   key={category.name}
                   onClick={() => setSelectedCategory(category.name)}
-                  className={`px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                  className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl transition-all duration-300 whitespace-nowrap border text-xs sm:text-sm font-medium
+                    touch-manipulation shrink-0 ${
                     selectedCategory === category.name 
                       ? 'bg-green-500/20 border-green-500/50 text-green-300 shadow-lg shadow-green-500/10' 
-                      : 'bg-slate-700/50 border-slate-600/50 text-gray-300 hover:bg-green-500/10 hover:border-green-500/30'
+                      : 'bg-slate-700/50 border-slate-600/50 text-gray-300 hover:bg-green-500/10 hover:border-green-500/30 active:bg-green-500/15'
                   }`}
                 >
                   {category.name}
