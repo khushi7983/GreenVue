@@ -49,7 +49,7 @@
 
 // export default Footer
 import React from "react";
-import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6"; // Use fa6 for FontAwesome 6
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa6"; // Use fa6 for FontAwesome 6
 
 const Footer = () => {
   return (
@@ -84,22 +84,19 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Contact</h3>
-            <p className="text-gray-400">info@greeninvest.com</p>
+            <p className="text-gray-400">khushipanwargzb@gmail.com</p>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-green-500 transition">
-                <FaTwitter className="w-6 h-6" />
+              <a href="https://github.com/khushi7983" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition">
+                <FaGithub className="w-6 h-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-green-500 transition">
-                <FaFacebook className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-green-500 transition">
-                <FaInstagram className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-green-500 transition">
+              <a href="https://www.linkedin.com/in/khushi-panwar-139323256/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition">
                 <FaLinkedin className="w-6 h-6" />
+              </a>
+              <a href="https://www.instagram.com/_khushii__001?igsh=MW1kZHEwMWdjeGV6dw==" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-green-500 transition">
+                <FaInstagram className="w-6 h-6" />
               </a>
             </div>
           </div>
