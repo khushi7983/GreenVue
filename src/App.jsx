@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import LandingPage from './LandingPage'
 import Footer from './Footer'
 import FeaturePage from './FeaturePage'
@@ -18,6 +18,17 @@ import Login from './components/auth/Login'
 import Signup from './components/auth/Signup'
 import AuthTest from './components/auth/AuthTest'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+
+// Component to conditionally render Footer
+const ConditionalFooter = () => {
+  const location = useLocation();
+  
+  // Hide footer on feature pages
+  const hideFooterRoutes = ['/features'];
+  const shouldHideFooter = hideFooterRoutes.some(route => location.pathname.startsWith(route));
+  
+  return !shouldHideFooter ? <Footer /> : null;
+};
 
 function App() {
   return (
@@ -79,7 +90,7 @@ function App() {
             </ProtectedRoute>
           } />
         </Routes>
-        <Footer />
+        <ConditionalFooter />
       </div>
     </BrowserRouter>
   )

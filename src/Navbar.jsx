@@ -74,7 +74,7 @@ const Navbar = ({ onGetStarted }) => {
   const handleFeaturesClick = (e) => {
     e.preventDefault();
     if (isAuthenticated) {
-      navigate('/features');
+      navigate('/features/esg-guide');
     } else {
       navigate('/login');
     }
@@ -103,84 +103,116 @@ const Navbar = ({ onGetStarted }) => {
           : 'backdrop-blur-lg bg-gray-900/80 border-gray-800/50 shadow-lg py-4'
       }`}>
         <div className="flex items-center space-x-2">
-          <span className="text-3xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-500 
-                          bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
-            GreenVest
-          </span>
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
+            {/* <div className="w-8 h-8 bg-gradient-to-r from-green-400 to-emerald-500 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">GV</span>
+            </div> */}
+            <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-500 
+                            bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
+              GreenVue
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center">
-          <div className="hidden md:flex items-center space-x-6 mr-6 bg-white/5  backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-            <a href="#about" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
+          <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 mr-4 xl:mr-6 bg-white/5 backdrop-blur-sm px-3 xl:px-4 py-2 rounded-full border border-white/10">
+            <a href="#about" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
                                    relative group">
               About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
             </a>
-            <button onClick={handleFeaturesClick} className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
+            <button onClick={handleFeaturesClick} className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
                                    relative group">
-              Features {!isAuthenticated && <span className="text-xs text-yellow-400 ml-1">*</span>}
+              Tools {!isAuthenticated && <span className="text-xs text-yellow-400 ml-1">*</span>}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
             </button>
+            <button 
+              onClick={() => {navigate('/green-funds'); setIsMobileMenuOpen(false);}} 
+              className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
+                         relative group"
+            >
+              Funds
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+            </button>
+            {/* <button 
+              onClick={() => {navigate('/green-news'); setIsMobileMenuOpen(false);}} 
+              className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
+                         relative group"
+            >
+              News
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
+            </button> */}
             {isAuthenticated && (
               <button 
                 onClick={() => navigate('/portfolio')} 
-                className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
+                className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
                            relative group"
               >
                 Portfolio
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
               </button>
             )}
-            <a href="#faq" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
+            <a href="#faq" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium text-sm xl:text-base
                                    relative group">
               FAQ
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
             </a>
-            <a href="#working" className="text-gray-300 hover:text-green-400 transition-all duration-300 font-medium
-                                   relative group">
-              How It Works
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300"></span>
-            </a>
           </div>
           
-          <div className="flex items-center space-x-3">
+          {/* Search Bar - Hidden on small screens */}
+          {/* <div className="hidden xl:flex items-center mr-4">
+            <div className="relative">
+              <input 
+                type="text" 
+                placeholder="Search funds..."
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 pr-10 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-green-400/50 focus:bg-white/10 transition-all duration-300 w-48"
+              />
+              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-green-400 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </div> */}
+          
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <button className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all 
                               duration-300 backdrop-blur-sm border border-white/10 hover:border-green-400/50">
               <Moon className="w-4 h-4 text-gray-300 hover:text-green-400 transition-colors" />
             </button>
             
             {isAuthenticated ? (
-              <div className="hidden md:flex items-center space-x-3">
-                <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm px-3 py-2 rounded-full border border-white/10">
+              <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
+                <div className="flex items-center space-x-2 bg-white/5 backdrop-blur-sm px-2 lg:px-3 py-2 rounded-full border border-white/10">
                   <User className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-gray-300">Welcome, {user?.name}</span>
+                  <span className="text-xs lg:text-sm text-gray-300 max-w-24 lg:max-w-none truncate">Welcome, {user?.name}</span>
                 </div>
                 <button 
                   onClick={handleLogout}
-                  className="flex items-center space-x-2 bg-red-500/20 hover:bg-red-500/30 
+                  className="flex items-center space-x-1 lg:space-x-2 bg-red-500/20 hover:bg-red-500/30 
                            border border-red-500/30 hover:border-red-500/50 text-red-400 hover:text-red-300 
-                           px-4 py-2 rounded-full font-medium transition-all duration-300"
+                           px-2 lg:px-4 py-2 rounded-full font-medium transition-all duration-300 text-xs lg:text-sm"
                 >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
+                  <LogOut className="w-3 h-3 lg:w-4 lg:h-4" />
+                  <span className="hidden lg:inline">Logout</span>
                 </button>
               </div>
             ) : (
-              <div className="hidden md:flex items-center space-x-3">
+              <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
                 <button 
                   onClick={handleLogin}
-                  className="text-gray-300 hover:text-green-400 px-4 py-2 rounded-full 
+                  className="text-gray-300 hover:text-green-400 px-3 lg:px-4 py-2 rounded-full 
                            font-medium transition-all duration-300 border border-gray-600 
-                           hover:border-green-400"
+                           hover:border-green-400 text-xs lg:text-sm"
                 >
                   Login
                 </button>
                 <button 
                   onClick={handleGetStartedClick}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 
-                            hover:from-green-600 hover:to-emerald-700 text-white px-5 py-2.5 rounded-full 
+                  className="flex items-center space-x-1 lg:space-x-2 bg-gradient-to-r from-green-500 to-emerald-600 
+                            hover:from-green-600 hover:to-emerald-700 text-white px-3 lg:px-5 py-2 lg:py-2.5 rounded-full 
                             font-semibold transition-all duration-300 transform hover:scale-105 
-                            shadow-lg hover:shadow-green-500/25"
+                            shadow-lg hover:shadow-green-500/25 text-xs lg:text-sm"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="w-3 h-3" />
@@ -190,7 +222,7 @@ const Navbar = ({ onGetStarted }) => {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all 
+              className="lg:hidden p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all 
                         duration-300 backdrop-blur-sm border border-white/10"
             >
               {isMobileMenuOpen ? (
@@ -204,46 +236,94 @@ const Navbar = ({ onGetStarted }) => {
       </nav>
 
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-xl 
-                       border-b border-gray-700/50 md:hidden">
+        <div className="fixed top-full left-0 w-full bg-gray-900/98 backdrop-blur-xl 
+                       border-b border-gray-700/50 lg:hidden z-40 max-h-screen overflow-y-auto">
           <div className="px-4 py-6 space-y-4">
+            {/* Search Bar for Mobile */}
+            {/* <div className="relative mb-6">
+              <input 
+                type="text" 
+                placeholder="Search funds..."
+                className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-3 pr-10 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-green-400/50 focus:bg-white/10 transition-all duration-300"
+              />
+              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-green-400 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+             */}
             <a href="#about" 
                onClick={() => setIsMobileMenuOpen(false)}
-               className="block text-gray-300 hover:text-green-400 transition-colors font-medium">
-              About
+               className="flex items-center space-x-3 text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>About</span>
             </a>
+            
             <button 
                onClick={handleFeaturesClick}
-               className="block text-left w-full text-gray-300 hover:text-green-400 transition-colors font-medium">
-              Features {!isAuthenticated && <span className="text-xs text-yellow-400 ml-1">*</span>}
+               className="flex items-center justify-between w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span>ESG Guide</span>
+              </div>
+              {!isAuthenticated && <span className="text-xs text-yellow-400">*</span>}
             </button>
+            
+            <button 
+              onClick={() => {navigate('/green-funds'); setIsMobileMenuOpen(false);}} 
+              className="flex items-center space-x-3 w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              <span>Green Funds</span>
+            </button>
+            
+            {/* <button 
+              onClick={() => {navigate('/green-news'); setIsMobileMenuOpen(false);}} 
+              className="flex items-center space-x-3 w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+              <span>ESG News</span>
+            </button> */}
+            
             {isAuthenticated && (
               <button 
                 onClick={() => {navigate('/portfolio'); setIsMobileMenuOpen(false);}}
-                className="block text-left w-full text-gray-300 hover:text-green-400 transition-colors font-medium">
-                Portfolio
+                className="flex items-center space-x-3 w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Portfolio</span>
               </button>
             )}
+            
             <a href="#faq" 
                onClick={() => setIsMobileMenuOpen(false)}
-               className="block text-gray-300 hover:text-green-400 transition-colors font-medium">
-              FAQ
-            </a>
-            <a href="#working" 
-               onClick={() => setIsMobileMenuOpen(false)}
-               className="block text-gray-300 hover:text-green-400 transition-colors font-medium">
-              How It Works
+               className="flex items-center space-x-3 text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>FAQ</span>
             </a>
             {isAuthenticated ? (
-              <div className="space-y-3 pt-4 border-t border-gray-700">
-                <div className="flex items-center space-x-2 text-green-400">
-                  <User className="w-4 h-4" />
-                  <span className="text-sm">Welcome, {user?.name}</span>
+              <div className="space-y-4 pt-6 border-t border-gray-700/50">
+                <div className="flex items-center space-x-3 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
+                  <User className="w-5 h-5 text-green-400" />
+                  <div>
+                    <span className="text-sm text-green-400 font-medium">Welcome back!</span>
+                    <p className="text-xs text-gray-300">{user?.name}</p>
+                  </div>
                 </div>
                 <button 
                   onClick={handleLogout}
-                  className="w-full flex items-center justify-center space-x-2 bg-red-500/20 
-                           border border-red-500/30 text-red-400 px-5 py-2.5 rounded-full 
+                  className="w-full flex items-center justify-center space-x-2 bg-red-500/20 hover:bg-red-500/30
+                           border border-red-500/30 hover:border-red-500/50 text-red-400 hover:text-red-300 px-5 py-3 rounded-xl 
                            font-medium transition-all duration-300"
                 >
                   <LogOut className="w-4 h-4" />
@@ -251,10 +331,10 @@ const Navbar = ({ onGetStarted }) => {
                 </button>
               </div>
             ) : (
-              <div className="space-y-3 pt-4 border-t border-gray-700">
+              <div className="space-y-3 pt-6 border-t border-gray-700/50">
                 <button 
                   onClick={handleLogin}
-                  className="w-full text-gray-300 hover:text-green-400 px-5 py-2.5 rounded-full 
+                  className="w-full text-gray-300 hover:text-green-400 hover:bg-white/5 px-5 py-3 rounded-xl 
                            font-medium transition-all duration-300 border border-gray-600 
                            hover:border-green-400"
                 >
@@ -263,11 +343,11 @@ const Navbar = ({ onGetStarted }) => {
                 <button 
                   onClick={handleGetStartedClick}
                   className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r 
-                            from-green-500 to-emerald-600 text-white px-5 py-2.5 rounded-full 
-                            font-semibold transition-all duration-300"
+                            from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-5 py-3 rounded-xl 
+                            font-semibold transition-all duration-300 shadow-lg hover:shadow-green-500/25"
                 >
                   <span>Get Started</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             )}
