@@ -176,10 +176,10 @@ const Navbar = ({ onGetStarted }) => {
           </div> */}
           
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <button className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all 
+            {/* <button className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all 
                               duration-300 backdrop-blur-sm border border-white/10 hover:border-green-400/50">
               <Moon className="w-4 h-4 text-gray-300 hover:text-green-400 transition-colors" />
-            </button>
+            </button> */}
             
             {isAuthenticated ? (
               <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
