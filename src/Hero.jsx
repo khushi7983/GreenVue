@@ -1,8 +1,24 @@
 // src/components/Hero.jsx
 import React from 'react';
 import { TrendingUp, Shield, Globe, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = ({ onStartInvesting }) => {
+  const navigate = useNavigate();
+
+  const handleStartInvesting = () => {
+    navigate('/green-funds');
+  };
+
+  const handleLearnMore = () => {
+    // Check if user is authenticated for ESG guide
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/features/esg-guide');
+    } else {
+      navigate('/login');
+    }
+  };
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
@@ -33,7 +49,7 @@ const Hero = ({ onStartInvesting }) => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <button 
-            onClick={onStartInvesting}
+            onClick={handleStartInvesting}
             className="group relative bg-gradient-to-r from-green-500 to-emerald-600 
                       hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 
                       rounded-xl font-bold text-base transition-all duration-300 
@@ -48,7 +64,9 @@ const Hero = ({ onStartInvesting }) => {
                            opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
           </button>
           
-          <button className="group flex items-center space-x-2 text-gray-300 hover:text-white 
+          <button 
+            onClick={handleLearnMore}
+            className="group flex items-center space-x-2 text-gray-300 hover:text-white 
                             px-6 py-3 rounded-xl border border-gray-600/50 hover:border-green-400/50
                             backdrop-blur-sm transition-all duration-300 hover:bg-white/5 min-w-[180px]">
             <span className="font-semibold">Learn More</span>

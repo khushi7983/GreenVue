@@ -12,7 +12,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/features');
+    navigate('/green-funds');
   };
 
   return (

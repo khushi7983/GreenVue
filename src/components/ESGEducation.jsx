@@ -1,9 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaSearch, FaChartLine, FaNewspaper, FaLeaf, FaChartPie, FaGraduationCap, FaRocket, FaUsers, FaHeart } from 'react-icons/fa';
+import { FaSearch, FaChartLine, FaNewspaper, FaLeaf, FaChartPie, FaGraduationCap, FaRocket, FaUsers, FaHeart, FaCalculator } from 'react-icons/fa';
 import { Leaf, TrendingUp, Globe, Users, Lightbulb, Target, Sparkles, ArrowRight, Play, BookOpen } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ESGEducation = () => {
+  const navigate = useNavigate();
+
+  const handleStartInvesting = () => {
+    navigate('/green-funds');
+  };
+
+  const handleCalculateImpact = () => {
+    // Check if user is authenticated for impact calculator
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/features/impact-calculator');
+    } else {
+      navigate('/login');
+    }
+  };
   return (
     <div className="relative overflow-hidden min-h-screen">
       {/* Background Elements */}
@@ -666,6 +682,7 @@ const ESGEducation = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={handleStartInvesting}
                   className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 
                            hover:to-emerald-700 px-8 py-4 rounded-xl font-semibold 
                            transition-all duration-300 shadow-lg hover:shadow-green-500/25
@@ -678,12 +695,13 @@ const ESGEducation = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={handleCalculateImpact}
                   className="border border-green-500/30 hover:border-green-500/60 px-8 py-4 
                            rounded-xl font-semibold transition-all duration-300 hover:bg-green-500/10
                            flex items-center justify-center gap-2"
                 >
-                  <FaUsers className="w-5 h-5" />
-                  Join Community
+                  <FaCalculator className="w-5 h-5" />
+                  Calculate Impact
                 </motion.button>
               </div>
             </motion.section>
