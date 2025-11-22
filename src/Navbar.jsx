@@ -6,10 +6,21 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Navbar = ({ onGetStarted }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showFeaturesSubmenu, setShowFeaturesSubmenu] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Feature navigation items
+  const features = [
+    { name: "ESG Investment Guide", path: "/features/esg-guide", icon: "📚" },
+    { name: "Green Mutual Funds", path: "/features/green-funds", icon: "🌱" },
+    { name: "Fund Comparison", path: "/features/fund-comparison", icon: "⚖️" },
+    { name: "Impact Calculator", path: "/features/impact-calculator", icon: "🧮" },
+    { name: "Green News", path: "/features/green-news", icon: "📰" },
+    { name: "AI Assistant", path: "/features/ai-assistant", icon: "🤖" },
+  ];
 
   // Check authentication status
   useEffect(() => {
@@ -73,12 +84,18 @@ const Navbar = ({ onGetStarted }) => {
 
   const handleFeaturesClick = (e) => {
     e.preventDefault();
-    if (isAuthenticated) {
-      navigate('/features/esg-guide');
-    } else {
+    if (!isAuthenticated) {
       navigate('/login');
+      setIsMobileMenuOpen(false);
+      return;
     }
+    setShowFeaturesSubmenu(!showFeaturesSubmenu);
+  };
+
+  const handleFeatureNavigation = (path) => {
+    navigate(path);
     setIsMobileMenuOpen(false);
+    setShowFeaturesSubmenu(false);
   };
 
   const handleLogout = () => {
@@ -235,10 +252,33 @@ const Navbar = ({ onGetStarted }) => {
         </div>
       </nav>
 
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed top-full left-0 w-full bg-gray-900/98 backdrop-blur-xl 
-                       border-b border-gray-700/50 lg:hidden z-40 max-h-screen overflow-y-auto">
-          <div className="px-4 py-6 space-y-4">
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden z-30"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          
+          {/* Mobile Menu */}
+          <div className="fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-gray-900/98 backdrop-blur-xl 
+                         border-l border-gray-700/50 lg:hidden z-40 overflow-y-auto transform transition-transform duration-300">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-700/50">
+              <span className="text-lg font-bold bg-gradient-to-r from-green-400 to-emerald-500 
+                              bg-clip-text text-transparent">
+                GreenVue
+              </span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300"
+              >
+                <X className="w-5 h-5 text-gray-300" />
+              </button>
+            </div>
+            
+            <div className="px-4 py-6 space-y-3">
             {/* Search Bar for Mobile */}
             {/* <div className="relative mb-6">
               <input 
@@ -255,32 +295,75 @@ const Navbar = ({ onGetStarted }) => {
              */}
             <a href="#about" 
                onClick={() => setIsMobileMenuOpen(false)}
-               className="flex items-center space-x-3 text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>About</span>
+               className="flex items-center space-x-4 text-gray-300 hover:text-green-400 
+                         hover:bg-green-500/10 active:bg-green-500/20 transition-all duration-200 
+                         font-medium p-4 rounded-xl border border-transparent hover:border-green-500/20"
+               style={{ minHeight: '56px' }}>
+              <div className="w-10 h-10 rounded-lg bg-gray-700/50 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="text-base">About</span>
             </a>
             
             <button 
                onClick={handleFeaturesClick}
-               className="flex items-center justify-between w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                <span>ESG Guide</span>
+               className="flex items-center justify-between w-full text-gray-300 hover:text-green-400 
+                         hover:bg-green-500/10 active:bg-green-500/20 transition-all duration-200 
+                         font-medium p-4 rounded-xl border border-transparent hover:border-green-500/20"
+               style={{ minHeight: '56px' }}>
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 rounded-lg bg-gray-700/50 flex items-center justify-center">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <span className="text-base">Tools & Features</span>
               </div>
-              {!isAuthenticated && <span className="text-xs text-yellow-400">*</span>}
+              <div className="flex items-center space-x-2">
+                {!isAuthenticated && <span className="text-xs text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded-full">Login Required</span>}
+                <svg className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${showFeaturesSubmenu ? 'rotate-90' : ''}`} 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
             </button>
+            
+            {/* Features Submenu */}
+            {showFeaturesSubmenu && isAuthenticated && (
+              <div className="ml-6 space-y-2 border-l-2 border-green-500/20 pl-4">
+                {features.map((feature) => (
+                  <button
+                    key={feature.path}
+                    onClick={() => handleFeatureNavigation(feature.path)}
+                    className="flex items-center space-x-3 w-full text-gray-400 hover:text-green-300 
+                              hover:bg-green-500/5 transition-all duration-200 font-medium p-3 rounded-lg
+                              text-sm"
+                  >
+                    <span className="text-lg">{feature.icon}</span>
+                    <span>{feature.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
             
             <button 
               onClick={() => {navigate('/green-funds'); setIsMobileMenuOpen(false);}} 
-              className="flex items-center space-x-3 w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-              <span>Green Funds</span>
+              className="flex items-center justify-between w-full text-gray-300 hover:text-green-400 
+                        hover:bg-green-500/10 active:bg-green-500/20 transition-all duration-200 
+                        font-medium p-4 rounded-xl border border-transparent hover:border-green-500/20"
+              style={{ minHeight: '56px' }}>
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 rounded-lg bg-gray-700/50 flex items-center justify-center">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <span className="text-base">Green Funds</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-gray-500" />
             </button>
             
             {/* <button 
@@ -295,64 +378,88 @@ const Navbar = ({ onGetStarted }) => {
             {isAuthenticated && (
               <button 
                 onClick={() => {navigate('/portfolio'); setIsMobileMenuOpen(false);}}
-                className="flex items-center space-x-3 w-full text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Portfolio</span>
+                className="flex items-center justify-between w-full text-gray-300 hover:text-green-400 
+                          hover:bg-green-500/10 active:bg-green-500/20 transition-all duration-200 
+                          font-medium p-4 rounded-xl border border-transparent hover:border-green-500/20"
+                style={{ minHeight: '56px' }}>
+                <div className="flex items-center space-x-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-700/50 flex items-center justify-center">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <span className="text-base">Portfolio</span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-gray-500" />
               </button>
             )}
             
             <a href="#faq" 
                onClick={() => setIsMobileMenuOpen(false)}
-               className="flex items-center space-x-3 text-gray-300 hover:text-green-400 hover:bg-white/5 transition-all duration-300 font-medium p-3 rounded-lg">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>FAQ</span>
+               className="flex items-center space-x-4 text-gray-300 hover:text-green-400 
+                         hover:bg-green-500/10 active:bg-green-500/20 transition-all duration-200 
+                         font-medium p-4 rounded-xl border border-transparent hover:border-green-500/20"
+               style={{ minHeight: '56px' }}>
+              <div className="w-10 h-10 rounded-lg bg-gray-700/50 flex items-center justify-center">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span className="text-base">FAQ</span>
             </a>
-            {isAuthenticated ? (
-              <div className="space-y-4 pt-6 border-t border-gray-700/50">
-                <div className="flex items-center space-x-3 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                  <User className="w-5 h-5 text-green-400" />
-                  <div>
-                    <span className="text-sm text-green-400 font-medium">Welcome back!</span>
-                    <p className="text-xs text-gray-300">{user?.name}</p>
+            {/* Authentication Section */}
+            <div className="mt-6 pt-4 border-t border-gray-700/50">
+              {isAuthenticated ? (
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4 p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 
+                                 rounded-xl border border-green-500/20">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <User className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <span className="text-base text-green-400 font-semibold">Welcome back!</span>
+                      <p className="text-sm text-gray-300 truncate max-w-40">{user?.name}</p>
+                    </div>
                   </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full flex items-center justify-center space-x-3 bg-red-500/20 hover:bg-red-500/30
+                             active:bg-red-500/40 border border-red-500/30 hover:border-red-500/50 text-red-400 hover:text-red-300 
+                             px-5 py-4 rounded-xl font-medium transition-all duration-200"
+                    style={{ minHeight: '56px' }}
+                  >
+                    <LogOut className="w-5 h-5" />
+                    <span className="text-base">Logout</span>
+                  </button>
                 </div>
-                <button 
-                  onClick={handleLogout}
-                  className="w-full flex items-center justify-center space-x-2 bg-red-500/20 hover:bg-red-500/30
-                           border border-red-500/30 hover:border-red-500/50 text-red-400 hover:text-red-300 px-5 py-3 rounded-xl 
-                           font-medium transition-all duration-300"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3 pt-6 border-t border-gray-700/50">
-                <button 
-                  onClick={handleLogin}
-                  className="w-full text-gray-300 hover:text-green-400 hover:bg-white/5 px-5 py-3 rounded-xl 
-                           font-medium transition-all duration-300 border border-gray-600 
-                           hover:border-green-400"
-                >
-                  Login
-                </button>
-                <button 
-                  onClick={handleGetStartedClick}
-                  className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r 
-                            from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-5 py-3 rounded-xl 
-                            font-semibold transition-all duration-300 shadow-lg hover:shadow-green-500/25"
-                >
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
+              ) : (
+                <div className="space-y-3">
+                  <button 
+                    onClick={handleLogin}
+                    className="w-full text-gray-300 hover:text-green-400 hover:bg-green-500/10 
+                             active:bg-green-500/20 px-5 py-4 rounded-xl font-medium transition-all duration-200 
+                             border border-gray-600 hover:border-green-400"
+                    style={{ minHeight: '56px' }}
+                  >
+                    <span className="text-base">Login</span>
+                  </button>
+                  <button 
+                    onClick={handleGetStartedClick}
+                    className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r 
+                              from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 
+                              active:from-green-700 active:to-emerald-800 text-white px-5 py-4 rounded-xl 
+                              font-semibold transition-all duration-200 shadow-lg hover:shadow-green-500/25"
+                    style={{ minHeight: '56px' }}
+                  >
+                    <span className="text-base">Get Started</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+            </div>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
