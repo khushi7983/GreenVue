@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import Hero from './Hero';
 import FeaturesSection from './Feature'; // Adjust path as needed
 import FAQSection from './FAQSection'; // Adjust path as needed
-import Working from './working'; // Adjust path as needed
+import Working from './Working'; // Adjust path as needed
 import Footer from './Footer'; // Adjust path as needed
 import AboutUs from './About'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
