@@ -1,4 +1,6 @@
 // Razorpay configuration and utility functions
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
+
 export const razorpayConfig = {
   // Key will be provided by backend in order response for security
   currency: 'INR',
