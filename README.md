@@ -15,39 +15,39 @@
 
 ---
 
-## 🌟 Features
+##  Features
 
-### 🤖 **AI-Powered Investment Assistant**
+###  **AI-Powered Investment Assistant**
 - Personalized fund recommendations based on risk assessment
 - Goal-based investment planning with timeline optimization
 - Portfolio rebalancing suggestions with ESG score integration
 - Interactive chat interface for investment queries
 
-### 📊 **Real-Time Market Analytics**
+###  **Real-Time Market Analytics**
 - Live NAV prices from AMFI API integration
 - Dynamic ESG fund data with performance tracking
 - Real-time stock price monitoring for major ESG stocks
 - Portfolio value updates with automatic calculation
 
-### 🌍 **Environmental Impact Tracking**
+###  **Environmental Impact Tracking**
 - Carbon footprint calculation based on investment portfolio
 - ESG score visualization and fund comparison
 - Impact metrics showing environmental contribution
 - Sustainability goal tracking and progress monitoring
 
-### 💰 **Secure Investment Management**
+###  **Secure Investment Management**
 - Integrated Razorpay payment gateway for seamless transactions
 - Portfolio management with detailed transaction history
 - Fund comparison tools with comprehensive analytics
 - Investment tracking with profit/loss calculations
 
-### 📱 **Modern User Experience**
+###  **Modern User Experience**
 - Responsive design optimized for all devices
 - Intuitive dashboard with data visualizations
 - Real-time notifications and market updates
 - Clean, modern UI built with Tailwind CSS
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### **Frontend**
 - **React 18.2** - Modern UI library with hooks
@@ -75,7 +75,7 @@
 - **Prettier** - Automated code formatting
 - **Git** - Version control system
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 ```bash
@@ -106,21 +106,7 @@ cd ..
 3. **Environment Setup**
 
 Create `.env` file in the root directory:
-```env
-VITE_API_URL=http://localhost:5000
-VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
-```
-
 Create `.env` file in the server directory:
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/greenvue
-JWT_SECRET=your_jwt_secret_key
-JWT_REFRESH_SECRET=your_jwt_refresh_secret
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_secret
-ALPHA_VANTAGE_API_KEY=your_alpha_vantage_key
-```
 
 4. **Start the application**
 ```bash
@@ -139,7 +125,7 @@ Frontend: http://localhost:5173
 Backend: http://localhost:5000
 ```
 
-## 🏗️ System Architecture
+##  System Architecture
 
 
 ```mermaid
@@ -478,7 +464,7 @@ const calculateImpact = (portfolio) => {
 };
 ```
 
-## 🚦 Testing
+##  Testing
 
 ```bash
 # Run frontend tests
@@ -495,7 +481,7 @@ npm run test:integration
 npm run test:coverage
 ```
 
-## 🔒 Security Features
+##  Security Features
 
 - **JWT Authentication** with access and refresh tokens
 - **Password Hashing** using bcrypt with salt rounds
@@ -513,7 +499,7 @@ npm run test:coverage
 - **Debounced Search** to reduce API calls
 - **Memoization** for expensive calculations
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
@@ -521,9 +507,9 @@ npm run test:coverage
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## 📄 License
+##  License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License .
 
 ## 👥 Connect With Me
 
@@ -545,6 +531,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <p>⭐ If you found this project helpful, please consider giving it a star!</p>
+  <p> If you found this project helpful, please consider giving it a star!</p>
   <p>🌱 Built with passion for sustainable investing and clean technology</p>
 </div>
+
