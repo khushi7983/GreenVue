@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 const AuthTest = () => {
   const testSignup = async () => {
@@ -11,7 +12,7 @@ const AuthTest = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.SIGNUP), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ const AuthTest = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.LOGIN), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
