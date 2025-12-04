@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaChartLine, FaRupeeSign, FaCalendarAlt, FaSpinner, FaLeaf, FaArrowUp, FaSync } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 const PortfolioPage = () => {
   const [transactions, setTransactions] = useState([]);

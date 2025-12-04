@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaLeaf, FaWater, FaSeedling, FaUsers, FaSolarPanel, FaChartLine, FaSpinner, FaGlobe, FaIndustry, FaSync , FaCalculator,FaInfoCircle} from 'react-icons/fa';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 const ImpactCalculator = () => {
   const [investment, setInvestment] = useState('');

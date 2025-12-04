@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaLeaf, FaCheckCircle, FaChartLine, FaInfoCircle, FaRupeeSign, FaCreditCard, FaSpinner } from 'react-icons/fa';
 import { razorpayConfig, createRazorpayOrder, verifyRazorpayPayment, initializeRazorpay } from '../utils/razorpay';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 const TransactionPage = () => {
   const location = useLocation();

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Mail, Lock, User, CheckCircle, AlertCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 const Signup = () => {
   const [formData, setFormData] = useState({

@@ -18,6 +18,7 @@ import {
   FaExchangeAlt
 } from 'react-icons/fa';
 import axios from 'axios';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 // Move FundSelector component outside to prevent re-renders
 const FundSelector = React.memo(({ 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaSpinner, FaChartLine, FaLeaf, FaPercentage, FaRupeeSign, FaInfoCircle, FaCircle } from 'react-icons/fa';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 const GreenMutualFund = () => {
   const [funds, setFunds] = useState([]);
