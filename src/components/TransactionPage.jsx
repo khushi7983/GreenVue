@@ -38,7 +38,7 @@ const TransactionPage = () => {
 
       try {
         setNavLoading(true);
-        const response = await fetch(`http://localhost:5000/api/payment/nav/${fund.schemeCode}`);
+        const response = await fetch(buildApiUrl(`${API_ENDPOINTS.PAYMENT.NAV}/${fund.schemeCode}`));
         const data = await response.json();
         
         if (data.success && data.nav) {

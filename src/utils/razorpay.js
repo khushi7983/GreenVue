@@ -19,7 +19,7 @@ export const createRazorpayOrder = async (amount, fundName, fundSymbol, navPrice
 
     const units = (amount / navPrice).toFixed(4);
 
-    const response = await fetch('http://localhost:5000/api/payment/create-order', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.PAYMENT.CREATE_ORDER), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ export const verifyRazorpayPayment = async (paymentData) => {
       throw new Error('Authentication required');
     }
 
-    const response = await fetch('http://localhost:5000/api/payment/verify-payment', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.PAYMENT.VERIFY_PAYMENT), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

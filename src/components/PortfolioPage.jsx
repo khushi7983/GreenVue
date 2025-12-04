@@ -29,10 +29,10 @@ const PortfolioPage = () => {
 
       // Fetch transactions and portfolio summary in parallel
       const [transactionsRes, portfolioRes] = await Promise.all([
-        fetch('http://localhost:5000/api/payment/transactions', {
+        fetch(buildApiUrl(API_ENDPOINTS.PAYMENT.TRANSACTIONS), {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
-        fetch('http://localhost:5000/api/payment/portfolio', {
+        fetch(buildApiUrl(API_ENDPOINTS.PAYMENT.PORTFOLIO), {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);

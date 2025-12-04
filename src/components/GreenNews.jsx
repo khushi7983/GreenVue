@@ -9,7 +9,7 @@ const GreenNews = () => {
   const fetchNews = async () => {
     try {
       console.log('Attempting to fetch news...'); // Debug log
-      const response = await fetch(`http://localhost:5000/api/news${searchTerm ? `?topic=${searchTerm}` : ''}`);
+      const response = await fetch(buildApiUrl(`${API_ENDPOINTS.NEWS}${searchTerm ? `?topic=${searchTerm}` : ''}`));
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

@@ -22,7 +22,7 @@ const GreenMutualFund = () => {
   useEffect(() => {
     const fetchFunds = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/green-funds');
+        const response = await axios.get(buildApiUrl(API_ENDPOINTS.FUNDS.GREEN_FUNDS));
         setFunds(response.data);
       } catch (error) {
         console.error('Error fetching funds:', error);
@@ -37,7 +37,7 @@ const GreenMutualFund = () => {
   const handleFundSelect = async (fund) => {
     setSelectedFund(fund);
     try {
-      const response = await axios.get(`http://localhost:5000/api/recommendations/${fund.id}`);
+      const response = await axios.get(buildApiUrl(`${API_ENDPOINTS.FUNDS.RECOMMENDATIONS}/${fund.id}`));
       setRecommendations(response.data);
     } catch (error) {
       console.error('Error fetching recommendations:', error);

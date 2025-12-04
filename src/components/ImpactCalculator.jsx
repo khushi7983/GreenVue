@@ -109,7 +109,7 @@ const ImpactCalculator = () => {
         throw new Error('User not authenticated');
       }
 
-      const response = await fetch('http://localhost:5000/api/payment/portfolio', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.PAYMENT.PORTFOLIO), {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
